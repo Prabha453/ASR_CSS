@@ -1,0 +1,70 @@
+{
+    "add": {
+        "apiKey": "aaaaa",
+        "fano": null,
+        "requestType": "SCADD",
+        "addShares": [
+            {
+                "currencyCode": "SGD",
+                "addSharesCapital": {
+                    "sharesPayable": "C",
+                    "allotmentDetails": {
+                        "noOfShares": {
+                            "ordinary": "100100"
+                        },
+                        "amtOfIssuedShareCapital": {
+                            "ordinary": "100100"
+                        },
+                        "amtOfPaidUpShareCapital": {
+                            "ordinary": "100100"
+                        }
+                    },
+                    "methodOfAllotment": {
+                        "selectedMethodOfAllotment": null,
+                        "index": null,
+                        "details": null
+                    },
+                    "subClassInd": "Y",
+                    "subClassDetails": [
+                        {
+                            "subClass": "A",
+                            "ordinary": "100100"
+                        }
+                    ],
+                    "treasurySharesInd": "N"
+                }
+            },
+            {
+                "currencyCode": "USD",
+                "addSharesCapital": {
+                    "sharesPayable": "C",
+                    "allotmentDetails": {
+                        "noOfShares": {
+                            "ordinary": "200"
+                        },
+                        "amtOfIssuedShareCapital": {
+                            "ordinary": "200"
+                        },
+                        "amtOfPaidUpShareCapital": {
+                            "ordinary": "200"
+                        }
+                    },
+                    "methodOfAllotment": {
+                        "selectedMethodOfAllotment": null,
+                        "index": null,
+                        "details": null
+                    },
+                    "subClassInd": "Y",
+                    "subClassDetails": [
+                        {
+                            "subClass": "A",
+                            "ordinary": "200"
+                        }
+                    ],
+                    "treasurySharesInd": "N"
+                }
+            }
+        ]
+    }
+    
+}

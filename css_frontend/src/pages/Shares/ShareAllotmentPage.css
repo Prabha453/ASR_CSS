@@ -1,0 +1,269 @@
+/* ── Page wrap ────────────────────────────────────────────────────────────── */
+.sap-wrap { width: 100%; }
+
+/* ── Company context strip ───────────────────────────────────────────────── */
+.sap-context-strip {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  margin-bottom: 16px;
+  background: #fff;
+  border: 1.5px solid var(--vz-border-color);
+  border-radius: 10px;
+  flex-wrap: wrap;
+  box-shadow: 0 1px 4px rgba(0,0,0,.05);
+}
+
+.sap-back-btn {
+  margin-left: auto;
+  display: inline-flex; align-items: center; gap: 5px;
+  height: 32px; padding: 0 14px;
+  font-size: 12px; font-weight: 600;
+  color: #405189; background: rgba(64,81,137,.08);
+  border: 1.5px solid rgba(64,81,137,.2); border-radius: 7px;
+  cursor: pointer; white-space: nowrap; flex-shrink: 0;
+  transition: all 0.15s;
+}
+.sap-back-btn:hover { background: rgba(64,81,137,.15); border-color: rgba(64,81,137,.4); }
+.sap-back-btn i { font-size: 14px; }
+
+/* ── Cards ───────────────────────────────────────────────────────────────── */
+.sap-card { border-radius: 10px; margin-bottom: 16px; border: 1.5px solid var(--vz-border-color); }
+.sap-card .card-body { padding: 20px 22px; }
+
+/* ── Share hint strip ─────────────────────────────────────────────────────── */
+.sap-share-hint {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding: 6px 12px;
+  background: rgba(64,81,137,.05);
+  border: 1px solid rgba(64,81,137,.15);
+  border-radius: 7px;
+  font-size: 12px;
+  color: #405189;
+  font-weight: 600;
+}
+.sap-share-hint span { display: flex; align-items: center; gap: 5px; }
+
+/* ── Warning ─────────────────────────────────────────────────────────────── */
+.sap-warn {
+  display: flex; align-items: center; gap: 6px;
+  margin-top: 8px; padding: 7px 12px;
+  background: rgba(240,178,50,.08); border: 1px solid rgba(240,178,50,.25);
+  border-radius: 7px; font-size: 12px; color: #c49a0a; font-weight: 500;
+}
+
+/* ── Add line button ─────────────────────────────────────────────────────── */
+.sap-add-line-btn { flex-shrink: 0; margin-bottom: 16px; }
+
+/* ── Company share info strip ────────────────────────────────────────────── */
+.sap-share-info-strip {
+  display: flex;
+  gap: 0;
+  margin-bottom: 14px;
+  border: 1.5px solid rgba(64,81,137,.2);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.sap-sinfo-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 9px 14px;
+  border-right: 1px solid rgba(64,81,137,.15);
+  background: rgba(64,81,137,.04);
+}
+.sap-sinfo-item:last-child { border-right: none; }
+.sap-sinfo-item span  { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: #878a99; }
+.sap-sinfo-item strong { font-size: 13px; font-weight: 700; color: var(--vz-body-color); }
+
+/* Auto-calc tag */
+.sap-auto-tag {
+  display: inline-block;
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: rgba(10,179,156,.15);
+  color: #0ab39c;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .03em;
+  vertical-align: middle;
+  margin-left: 3px;
+}
+
+/* Auto-calculated cell value */
+.sap-line-auto {
+  height: 30px;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #495057;
+  background: #f8f9fa;
+  border: 1.5px solid #e9ebec;
+  border-radius: 6px;
+  min-width: 70px;
+  white-space: nowrap;
+}
+.sap-line-issued { color: #c49a0a; }
+.sap-line-paidup { color: #0ab39c; }
+
+.sap-no-consid-tag {
+  font-size: 10px;
+  font-weight: 700;
+  color: #6559cc;
+  background: rgba(101,89,204,.1);
+  border-radius: 4px;
+  padding: 2px 6px;
+}
+
+/* ── Line items table ────────────────────────────────────────────────────── */
+.sap-line-table-wrap { overflow-x: auto; }
+
+.sap-line-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  min-width: 600px;
+}
+
+.sap-line-table thead tr {
+  background: #f8f9fa;
+  border-bottom: 2px solid rgba(64,81,137,.18);
+}
+.sap-line-table thead th {
+  padding: 8px 10px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: #878a99;
+  white-space: nowrap;
+}
+
+.sap-line-row { border-bottom: 1px solid #f0f2f5; }
+.sap-line-row:hover { background: rgba(64,81,137,.025); }
+
+.sap-line-row td { padding: 6px 6px; vertical-align: middle; }
+
+.sap-line-seq { color: #c0c7d6; font-size: 11px; text-align: center; width: 24px; }
+
+.sap-line-input {
+  width: 100%;
+  min-width: 70px;
+  height: 30px;
+  padding: 0 8px;
+  border: 1.5px solid var(--vz-border-color);
+  border-radius: 6px;
+  font-size: 12px;
+  color: var(--vz-body-color);
+  background: var(--vz-card-bg, #fff);
+  outline: none;
+  transition: border-color 0.15s;
+}
+.sap-line-input:focus { border-color: #405189; box-shadow: 0 0 0 2px rgba(64,81,137,.1); }
+.sap-line-input::placeholder { color: #c0c7d6; }
+
+.sap-line-del {
+  display: flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px; border-radius: 6px;
+  border: 1.5px solid rgba(240,101,72,.25);
+  background: rgba(240,101,72,.06);
+  color: #f06548; cursor: pointer; font-size: 14px;
+  transition: all 0.15s;
+}
+.sap-line-del:hover { background: #f06548; color: #fff; border-color: #f06548; }
+
+.sap-line-totals td {
+  padding: 7px 6px;
+  border-top: 1.5px solid rgba(64,81,137,.18);
+  background: rgba(64,81,137,.04);
+  font-size: 12px;
+}
+
+/* ── Summary card ────────────────────────────────────────────────────────── */
+.sap-summary-card { position: sticky; top: 80px; }
+
+.sap-summary-title {
+  font-size: 13px; font-weight: 700; color: #405189;
+  margin-bottom: 16px; display: flex; align-items: center; gap: 7px;
+}
+.sap-summary-title i { font-size: 16px; }
+
+.sap-summary-section { margin-bottom: 12px; }
+.sap-summary-label {
+  font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .05em; color: #878a99; margin-bottom: 3px;
+}
+.sap-summary-val  { font-size: 13px; font-weight: 600; color: var(--vz-body-color); }
+.sap-summary-empty { font-size: 12px; color: #c0c7d6; font-weight: 400; font-style: italic; }
+
+.sap-summary-divider { height: 1px; background: var(--vz-border-color); margin: 12px 0; }
+
+.sap-summary-stat {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 5px 0; font-size: 13px;
+  border-bottom: 1px dashed #f0f2f5;
+}
+.sap-summary-stat:last-child { border-bottom: none; }
+.sap-summary-stat span  { color: #878a99; font-weight: 500; }
+.sap-summary-stat strong { font-weight: 700; color: var(--vz-body-color); }
+
+/* ── Validation ──────────────────────────────────────────────────────────── */
+.sap-balance-error {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  margin-bottom: 12px;
+  background: rgba(240,101,72,.08);
+  border: 1.5px solid rgba(240,101,72,.3);
+  border-radius: 8px;
+  font-size: 12px;
+  color: #f06548;
+  font-weight: 500;
+}
+.sap-balance-error i { font-size: 16px; flex-shrink: 0; }
+.sap-balance-error strong { font-weight: 700; }
+
+.sap-line-error-row td { padding: 0 6px 5px; border-bottom: none; }
+
+.sap-val-error {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 10px; font-weight: 600; color: #f06548;
+}
+.sap-val-error i { font-size: 12px; }
+
+.sap-val-warn {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 10px; font-weight: 600; color: #c49a0a;
+}
+.sap-val-warn i { font-size: 12px; }
+
+/* Tally tag inside C+OC cell */
+.sap-tally-tag {
+  display: inline-flex; align-items: center;
+  margin-left: 5px; padding: 1px 4px;
+  border-radius: 3px; font-size: 9px; font-weight: 700;
+}
+.sap-tally-tag.tally-ok    { background: rgba(10,179,156,.15); color: #0ab39c; }
+.sap-tally-tag.tally-short { background: rgba(247,184,75,.15);  color: #c49a0a; }
+.sap-tally-tag.tally-over  { background: rgba(240,101,72,.15);  color: #f06548; }
+
+/* ── Action buttons ──────────────────────────────────────────────────────── */
+.sap-actions { display: flex; flex-direction: column; gap: 8px; }
+
+.sap-save-btn {
+  width: 100%; display: flex; align-items: center; justify-content: center;
+  gap: 7px; height: 40px; font-size: 14px; font-weight: 600; border-radius: 9px;
+}
+.sap-cancel-btn {
+  width: 100%; display: flex; align-items: center; justify-content: center;
+  gap: 7px; height: 36px; font-size: 13px; font-weight: 600; border-radius: 9px;
+  border: 1.5px solid var(--vz-border-color); color: #878a99;
+}
+.sap-cancel-btn:hover { border-color: #f06548; color: #f06548; }

@@ -1,0 +1,175 @@
+{
+    "apiKey": "aaaaa",
+    "fano": null,
+    "requestType": "SHADD",
+    "addShares": [
+        {
+            "shareholding": {
+                "currencyCode": "SGD",
+                "shareholder": {
+                    "category": "1",
+                    "newShareholder": {
+                        "individual": {
+                            "identificationTypeCode": "4",
+                            "identificationNo": "J658RSW6",
+                            "nationalityOrCitizenshipCode": "IN",
+                            "dateOfBirth": "1966-12-15",
+                            "name": "TING KEE HWA RICKY",
+                            "address": {
+                                "addressType": "F",
+                                "foreignAddress": {
+                                    "foreignAddressLine1": "First street",
+                                    "foreignAddressLine2": "Tamil nadu"
+                                }
+                            },
+                            "adminInfo": {
+                                "emailAddress": {
+                                    "emailAddressLocalPart": "RICKYTING118",
+                                    "emailAddressSignPart": "@",
+                                    "emailAddressDomainPart": "GMAIL.COM"
+                                },
+                                "mobileNumber": {
+                                    "prefix": "+",
+                                    "countryCode": "91",
+                                    "areaCode": "",
+                                    "mobileNo": "97276827"
+                                }
+                            }
+                        }
+                    },
+                    "allotmentDetails": {
+                        "noOfShares": {
+                            "ordinary": 100000
+                        },
+                        "amtOfIssuedShareCapital": {
+                            "ordinary": 100000
+                        },
+                        "amtOfPaidShareCapital": {
+                            "ordinary": 100000
+                        },
+                        "subClassInd": "Y",
+                        "subClassDetails": [
+                            {
+                                "subClass": "A",
+                                "ordinary": 100000
+                            }
+                        ],
+                        "dateOfAllotment": "2021-01-11"
+                    }
+                }
+            }
+        },
+        {
+            "shareholding": {
+                "currencyCode": "SGD",
+                "shareholder": {
+                    "category": "1",
+                    "newShareholder": {
+                        "individual": {
+                            "identificationTypeCode": "4",
+                            "identificationNo": "J5689246",
+                            "nationalityOrCitizenshipCode": "IN",
+                            "dateOfBirth": "1960-10-29",
+                            "name": "A V BUTLER",
+                            "address": {
+                                "addressType": "F",
+                                "foreignAddress": {
+                                    "foreignAddressLine1": "First",
+                                    "foreignAddressLine2": "Second"
+                                }
+                            },
+                            "adminInfo": {
+                                "emailAddress": {
+                                    "emailAddressLocalPart": "BILLBUTLEddR",
+                                    "emailAddressSignPart": "@",
+                                    "emailAddressDomainPart": "gmail.COM"
+                                },
+                                "mobileNumber": {
+                                    "prefix": "+",
+                                    "countryCode": "91",
+                                    "areaCode": "",
+                                    "mobileNo": "97858374"
+                                }
+                            }
+                        }
+                    },
+                    "allotmentDetails": {
+                        "noOfShares": {
+                            "ordinary": 100
+                        },
+                        "amtOfIssuedShareCapital": {
+                            "ordinary": 100
+                        },
+                        "amtOfPaidShareCapital": {
+                            "ordinary": 100
+                        },
+                        "subClassInd": "Y",
+                        "subClassDetails": [
+                            {
+                                "subClass": "A",
+                                "ordinary": "100"
+                            }
+                        ],
+                        "dateOfAllotment": "2021-01-11"
+                    }
+                }
+            }
+        },
+        {
+            "shareholding": {
+                "currencyCode": "USD",
+                "shareholder": {
+                    "category": "1",
+                    "newShareholder": {
+                        "individual": {
+                            "identificationTypeCode": "4",
+                            "identificationNo": "J5692141",
+                            "nationalityOrCitizenshipCode": "IN",
+                            "dateOfBirth": "1982-04-21",
+                            "name": "(LD) RYAN WALTER GALLOWAY",
+                            "address": {
+                                "addressType": "F",
+                                "foreignAddress": {
+                                    "foreignAddressLine1": "114 URBAN ROAD #4 MONTICELLO, WI 53570, USA",
+                                    "foreignAddressLine2": "Second"
+                                }
+                            },
+                            "adminInfo": {
+                                "emailAddress": {
+                                    "emailAddressLocalPart": "RYANGALddLOWAY",
+                                    "emailAddressSignPart": "@",
+                                    "emailAddressDomainPart": "gmail.com"
+                                },
+                                "mobileNumber": {
+                                    "prefix": "+",
+                                    "countryCode": "91",
+                                    "areaCode": "",
+                                    "mobileNo": "4563215"
+                                }
+                            }
+                        }
+                    },
+                    "allotmentDetails": {
+                        "noOfShares": {
+                            "ordinary": 200
+                        },
+                        "amtOfIssuedShareCapital": {
+                            "ordinary": 200
+                        },
+                        "amtOfPaidShareCapital": {
+                            "ordinary": 200
+                        },
+                        "subClassInd": "Y",
+                        "subClassDetails": [
+                            {
+                                "subClass": "A",
+                                "ordinary": "200"
+                            }
+                        ],
+                        "dateOfAllotment": "2021-01-11"
+                    }
+                }
+            }
+        }
+    ]
+}

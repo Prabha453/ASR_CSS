@@ -1,0 +1,45 @@
+{
+  "expo": {
+    "name": "ASR CSS",
+    "slug": "css_mobile",
+    "version": "1.0.0",
+    "main": "index.js",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#405189"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.asr.cssmobile"
+    },
+    "android": {
+      "package": "com.asr.cssmobile",
+      "usesCleartextTraffic": true,
+      "edgeToEdgeEnabled": true,
+      "softwareKeyboardLayoutMode": "resize",
+      "adaptiveIcon": {
+        "backgroundColor": "#405189",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-secure-store",
+      "expo-font",
+      "@react-native-community/datetimepicker"
+    ],
+    "androidStatusBar": {
+      "translucent": true,
+      "backgroundColor": "#00000000",
+      "barStyle": "light-content"
+    }
+  }
+}

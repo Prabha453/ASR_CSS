@@ -1,0 +1,187 @@
+/* ── ShareReplacementPage — mirrors buyback/cancel layout ─────────────────── */
+
+.srp-loading {
+  display: flex; align-items: center; gap: 10px;
+  padding: 40px 0; color: #6c757d; font-size: 14px;
+}
+
+/* ── Details card ── */
+.srp-details-card {
+  background: #fff; border: 1px solid #e2e5ef;
+  border-radius: 10px; padding: 16px 20px; margin-bottom: 14px;
+}
+.srp-details-row { display: flex; gap: 20px; flex-wrap: wrap; align-items: flex-end; }
+
+/* ── Fields ── */
+.srp-field-group { display: flex; flex-direction: column; gap: 5px; min-width: 160px; }
+.srp-field-group--remarks { flex: 1; min-width: 220px; }
+.srp-lbl { font-size: 11.5px; font-weight: 600; color: #6c757d; text-transform: uppercase; letter-spacing: 0.4px; }
+.srp-req { color: #e53935; }
+
+.srp-input {
+  height: 36px; padding: 0 10px;
+  border: 1px solid #dce0ec; border-radius: 6px;
+  font-size: 13.5px; color: #212529; background: #fff;
+  outline: none; transition: border-color 0.15s; width: 100%;
+}
+.srp-input:focus      { border-color: #405189; }
+.srp-input--err       { border-color: #e53935 !important; }
+.srp-field-group .asr-date-picker-input { height: 36px !important; font-size: 13.5px !important; border-radius: 6px !important; }
+
+/* ── Cert card: left/right split ── */
+.srp-cert-card {
+  background: #fff; border: 1.5px solid #e2e5ef;
+  border-radius: 12px;
+  display: flex; margin-bottom: 14px;
+  position: relative; /* so absolute dropdown positions relative to panel */
+}
+
+/* ── Left: source panel ── */
+.srp-src-panel {
+  width: 240px; min-width: 200px; flex-shrink: 0;
+  background: linear-gradient(160deg, #f0f3ff 0%, #f8f9fc 100%);
+  border-right: 1.5px solid #e2e5ef;
+  border-radius: 10px 0 0 10px;
+  padding: 16px 14px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.srp-src-badge {
+  display: flex; align-items: center; gap: 8px;
+  background: #fff; border: 1.5px solid #d5daf0;
+  border-radius: 8px; padding: 7px 10px;
+}
+.srp-src-badge i { font-size: 16px; color: #405189; flex-shrink: 0; }
+.srp-src-badge-info { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.srp-src-cert  { font-size: 13px; font-weight: 700; color: #2c3a6b; }
+.srp-src-folio { font-size: 10.5px; color: #6c757d; }
+.srp-src-holder {
+  display: flex; align-items: center; gap: 6px;
+  padding: 6px 8px; background: #405189;
+  border-radius: 7px; color: #fff;
+}
+.srp-src-holder i { font-size: 13px; opacity: .8; flex-shrink: 0; }
+.srp-src-holder-name { font-size: 12px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.srp-src-stats { display: flex; flex-direction: column; gap: 4px; }
+.srp-src-stat {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 5px 8px; background: #fff;
+  border: 1px solid #eaecf5; border-radius: 6px;
+}
+.srp-src-stat-lbl { font-size: 11px; color: #6c757d; font-weight: 500; }
+.srp-src-stat-val { font-size: 12px; font-weight: 700; color: #212529; font-variant-numeric: tabular-nums; }
+
+/* ── Right: replacement panel ── */
+.srp-repl-panel { flex: 1; padding: 16px 20px; min-width: 0; }
+
+/* ── Section header ── */
+.srp-section-hdr {
+  font-size: 11.5px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.6px; display: flex; align-items: center;
+  gap: 6px; padding: 5px 10px; border-radius: 5px; margin-bottom: 14px;
+}
+.srp-section-hdr--repl { background: #f3e8ff; color: #6c3d97; }
+
+/* ── Replacement input row ── */
+.srp-repl-fields { display: flex; flex-wrap: wrap; gap: 14px; align-items: flex-start; }
+
+/* ── Cert input with spinner ── */
+.srp-cert-input-wrap { position: relative; display: flex; align-items: center; }
+.srp-cert-input-wrap .srp-input { padding-right: 34px; }
+.srp-cert-spinner { position: absolute; right: 10px; color: #405189; }
+
+/* ── "Pick existing" button + dropdown ── */
+.srp-existing-wrap { position: relative; margin-top: 4px; }
+.srp-existing-btn {
+  background: none; border: none; padding: 0;
+  font-size: 11.5px; color: #6c3d97; font-weight: 600;
+  cursor: pointer; display: flex; align-items: center; gap: 4px;
+  text-decoration: underline; text-underline-offset: 2px;
+}
+.srp-existing-btn:hover { color: #5a3280; }
+.srp-existing-dropdown {
+  position: absolute; top: calc(100% + 4px); left: 0; z-index: 300;
+  min-width: 220px; background: #fff;
+  border: 1.5px solid #d5b8f0; border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(0,0,0,.15);
+  max-height: 200px; overflow-y: auto;
+}
+.srp-existing-loading, .srp-existing-empty {
+  padding: 8px 12px; font-size: 12px; color: #6c757d;
+  display: flex; align-items: center; gap: 6px;
+}
+.srp-existing-item {
+  width: 100%; background: none; border: none;
+  padding: 7px 12px; cursor: pointer;
+  display: flex; align-items: center; gap: 10px;
+  text-align: left; transition: background .1s;
+  border-bottom: 1px solid #f5eefc;
+}
+.srp-existing-item:last-child { border-bottom: none; }
+.srp-existing-item:hover { background: #f3e8ff; }
+.srp-existing-cert { font-size: 12.5px; font-weight: 700; color: #2c3a6b; min-width: 40px; }
+.srp-existing-meta { font-size: 11px; color: #6c757d; }
+
+/* ── Cert status line ── */
+.srp-cert-status {
+  font-size: 11.5px; margin-top: 3px; display: flex; align-items: center; gap: 4px;
+  color: #6c757d;
+}
+.srp-cert-status--new     { color: #2e7d32; }
+.srp-cert-status--combine { color: #6c3d97; font-weight: 600; }
+.srp-cert-status--err     { color: #e53935; }
+
+/* ── Combine preview box ── */
+.srp-combine-box {
+  margin-top: 16px; border: 1.5px solid #d5b8f0;
+  border-radius: 8px; overflow: hidden;
+}
+.srp-combine-hdr {
+  background: #f3e8ff; color: #6c3d97;
+  font-size: 11.5px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.5px; padding: 6px 12px;
+  display: flex; align-items: center; gap: 5px;
+}
+.srp-combine-rows { padding: 10px 12px; display: flex; flex-direction: column; gap: 6px; }
+.srp-combine-row  { display: flex; justify-content: space-between; align-items: center; font-size: 12.5px; }
+.srp-combine-row--src   { color: #495057; }
+.srp-combine-row--ex    { color: #405189; font-weight: 500; }
+.srp-combine-row--total { color: #6c3d97; font-weight: 700; font-size: 13px; }
+.srp-combine-label { flex: 1; }
+.srp-combine-val   { font-variant-numeric: tabular-nums; white-space: nowrap; margin-left: 12px; }
+.srp-combine-divider { border-top: 1px dashed #d5b8f0; margin: 2px 0; }
+
+/* ── Footer ── */
+.srp-footer {
+  background: #fff; border: 1px solid #e2e5ef;
+  border-radius: 10px; padding: 14px 20px; margin-top: 20px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 10px;
+}
+.srp-footer-summary { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.srp-sum-chip {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 4px 10px; border-radius: 20px;
+  font-size: 12.5px; font-weight: 600;
+  background: #eef3ff; color: #405189;
+}
+.srp-sum-chip--combine { background: #f3e8ff; color: #6c3d97; }
+.srp-footer-actions { display: flex; gap: 10px; }
+.srp-btn-cancel {
+  height: 36px; padding: 0 18px;
+  border: 1px solid #dce0ec; border-radius: 7px;
+  background: #fff; color: #495057;
+  font-size: 13.5px; font-weight: 500; cursor: pointer;
+  transition: border-color .15s;
+}
+.srp-btn-cancel:hover:not(:disabled) { border-color: #9099b0; }
+.srp-btn-save {
+  height: 36px; padding: 0 20px;
+  border: none; border-radius: 7px;
+  background: #6c3d97; color: #fff;
+  font-size: 13.5px; font-weight: 600; cursor: pointer;
+  display: flex; align-items: center; gap: 7px;
+  transition: background .15s;
+}
+.srp-btn-save:hover:not(:disabled) { background: #5a3280; }
+.srp-btn-save:disabled,
+.srp-btn-cancel:disabled { opacity: 0.6; cursor: not-allowed; }

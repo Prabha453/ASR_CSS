@@ -1,0 +1,120 @@
+'use strict';
+
+const table = require('../../helper/dbTable');
+const catalog = require('../../config/formBuilder/commonShortcodeCatalog');
+const { buildSemanticFingerprint } = require('../../domain/formBuilder/shortcodeDefinition');
+
+const legacyKeys = Object.freeze([
+    'shares.current',
+    'share_allotment.transaction_date',
+    'share_allotment.currency',
+    'share_allotment.allottees',
+    'share_allotment.total_quantity',
+    'share_allotment.total_issued_capital',
+    'share_allotment.total_paid_up_capital',
+    'share_allotment.total_consideration',
+    'share_transaction.type',
+    'share_transaction.date',
+    'share_transaction.lines',
+    'share_transaction.total_in_quantity',
+    'share_transaction.total_out_quantity',
+    'share_transaction.total_consideration',
+    'share_record.share_class_name',
+    'share_record.currency',
+    'share_record.share_type',
+    'share_record.number_of_shares',
+    'share_record.issued_share_capital',
+    'share_record.paid_up_capital',
+    'share_record.per_share',
+    'share_record.transaction_date',
+]);
+
+const definitions = catalog.filter(item => item.resolver === 'SHARE_DETAIL');
+
+const definitionRow = (item, now) => ({
+    shortcode_key: item.key,
+    label: item.label,
+    source_domain: item.domain,
+    sort_order: item.order,
+    resolver_name: item.resolver,
+    resolver_path: item.path,
+    value_type: item.type,
+    is_collection: Boolean(item.collection),
+    sensitivity: item.sensitivity || 'INTERNAL',
+    description: item.description || null,
+    example_value: item.example || null,
+    allowed_formats: JSON.stringify(item.formats || []),
+    selection_behavior: item.selection || 'NONE',
+    role_tags: JSON.stringify(item.roleTags || []),
+    semantic_fingerprint: buildSemanticFingerprint({
+        label: item.label,
+        sourceDomain: item.domain,
+        resolverName: item.resolver,
+        resolverPath: item.path,
+        valueType: item.type,
+        isCollection: Boolean(item.collection),
+    }),
+    status: 'ACTIVE',
+    is_deleted: false,
+    created_by: null,
+    created_at: now,
+    updated_by: null,
+    updated_at: now,
+});
+
+const updateRow = (item, now) => {
+    const row = definitionRow(item, now);
+    delete row.shortcode_key;
+    delete row.created_by;
+    delete row.created_at;
+    return row;
+};
+
+module.exports = {
+    async up(queryInterface, Sequelize) {
+        const definitionTable = table('form_shortcode_definitions');
+        const now = new Date();
+
+        await queryInterface.bulkUpdate(
+            definitionTable,
+            { status: 'RETIRED', updated_at: now },
+            { shortcode_key: { [Sequelize.Op.in]: legacyKeys } }
+        );
+
+        const existing = await queryInterface.sequelize.query(
+            `SELECT shortcode_key FROM ${definitionTable} WHERE shortcode_key IN (:keys)`,
+            {
+                replacements: { keys: definitions.map(item => item.key) },
+                type: Sequelize.QueryTypes.SELECT,
+            }
+        );
+        const existingKeys = new Set(existing.map(row => row.shortcode_key));
+        const rows = definitions
+            .filter(item => !existingKeys.has(item.key))
+            .map(item => definitionRow(item, now));
+        if (rows.length) await queryInterface.bulkInsert(definitionTable, rows, {});
+
+        for (const item of definitions) {
+            await queryInterface.bulkUpdate(
+                definitionTable,
+                updateRow(item, now),
+                { shortcode_key: item.key }
+            );
+        }
+    },
+
+    async down(queryInterface, Sequelize) {
+        const definitionTable = table('form_shortcode_definitions');
+        const now = new Date();
+        await queryInterface.bulkUpdate(
+            definitionTable,
+            { status: 'RETIRED', updated_at: now },
+            { shortcode_key: { [Sequelize.Op.in]: definitions.map(item => item.key) } }
+        );
+        await queryInterface.bulkUpdate(
+            definitionTable,
+            { status: 'ACTIVE', updated_at: now },
+            { shortcode_key: { [Sequelize.Op.in]: legacyKeys } }
+        );
+    },
+};

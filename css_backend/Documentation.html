@@ -1,0 +1,106 @@
+
+Back End Installation
+----------------------
+npm install //To install the dependencies
+npx sequelize-cli db:migrate //For db creation
+npx sequelize-cli db:seed:all //For seeding the db with initial data
+npm run dev //To start the server
+
+
+
+API Structure
+-----------------
+
+
+Entity : Individual
+src/
+├── models/
+│   ├── individual/          ← 7 individual models
+│   │   ├── Entity.js
+│   │   ├── EntityIndividualDetail.js
+│   │   ├── EntityIdentification.js
+│   │   ├── EntityAddress.js
+│   │   ├── EntityContact.js
+│   │   ├── EntityTag.js
+│   │   └── EntityRelationship.js
+│   └── company/             ← ready for company models
+│
+├── dao/
+│   ├── individual/          ← 6 individual DAOs
+│   └── company/
+│
+├── service/
+│   ├── individual/
+│   │   └── EntityIndividualService.js
+│   └── company/
+│
+├── controllers/
+│   ├── individual/
+│   │   └── EntityIndividualController.js
+│   └── company/
+│
+├── validator/
+│   ├── individual/
+│   │   └── EntityIndividualValidator.js
+│   └── company/
+│
+└── route/
+    ├── individual/
+    │   └── index.js         ← all 17 individual routes
+    └── company/
+
+
+
+Individual CRUD — API Reference
+Individual (Entity)
+Method	Endpoint	Description
+POST	/individual/create	Create individual with all sub-data
+GET	/individual/list	Paginated list (search, filter, sort)
+GET	/individual/get/:entity_id	Get full individual with all sub-records
+PUT	/individual/update/:entity_id	Update entity + individual details
+POST	/individual/delete	Soft delete { entity_id }
+
+
+ID Documents
+Method	Endpoint	Description
+POST	/individual/:entity_id/identification/create	Add ID document
+PUT	/individual/identification/update/:identification_id	Update ID document
+POST	/individual/identification/delete	Soft delete { identification_id }
+
+
+Addresses
+Method	Endpoint	Description
+POST	/individual/:entity_id/address/create	Add address
+PUT	/individual/address/update/:address_id	Update address
+POST	/individual/address/delete	Soft delete { address_id }
+
+
+Contacts
+Method	Endpoint	Description
+POST	/individual/:entity_id/contact/create	Add contact
+PUT	/individual/contact/update/:contact_id	Update contact
+POST	/individual/contact/delete	Soft delete { contact_id }
+
+
+Tags
+Method	Endpoint	Description
+POST	/individual/:entity_id/tag/create	Add tag
+POST	/individual/tag/delete	Soft delete { tag_id }  
+
+Relationships
+Method	Endpoint	Description
+POST	/individual/:entity_id/relationship/create	Add relationship
+POST	/individual/relationship/delete	Soft delete { relationship_id }
+PUT	/individual/relationship/update/:relationship_id	Update relationship
+
+
+Query Parameters for GET /list
+Param	Type	Example	Description
+search	string	John	Search in name, client_no
+status	string	ACTIVE	Filter by status
+page	number	1	Page number
+limit	number	10	Records per page
+order	string	entity_id:DESC	Sort field and direction
+start_date	date	2025-01-01	Created date from
+end_date	date	2025-12-31	Created date to
+

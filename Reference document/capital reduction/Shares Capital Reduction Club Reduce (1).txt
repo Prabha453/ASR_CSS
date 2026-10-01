@@ -1,0 +1,82 @@
+Company Level
+SGD | Ordinary | 140,000 | $140,000 | $140,000 | $1.00
+SGD | Ordinary | 60,000 | $2,000,000 | $2,000,000 | $33.333
+
+Shareholder
+Siong | SC 11 | 126,000 | $126,000 | $126,000 | $1.00
+Heng | SC 9 | 14,000 | $14,000 | $14,000 | $1.00
+Yan | SC 10 | 60,000 | $2,000,000 | $2,000,000 | $33.333
+
+TRANSFER
+Company Level
+SGD | Ordinary | 140,000 | $140,000 | $140,000 | $1.00
+SGD | Ordinary | 60,000 | $2,000,000 | $2,000,000 | $33.333
+------------------------------------------------------------
+SGD | Ordinary | 200,000 | $2,140,000 | $2,140,000
+
+YAN > SIONG
+Siong | SC 11 | 126,000 | $126,000 | $126,000 | $1.00
+Siong | SC 11 | 60,000 | $2,000,000 | $2,000,000 | $33.333
+Heng | SC 9 | 14,000 | $14,000 | $14,000 | $1.00
+
+CAPITAL REDUCTION
+Company Level
+SGD | Ordinary | 25,000 | $250,000 | $250,000 | $10.00
+
+Shareholder
+Heng | SC 13 | 5,000 | $50,000 | $50,000 | $10.00
+Siong | SC 12 | 20,000 | $200,000 | $200,000 | $10.00
+
+
+
+Select Type: 1. Reduce paid Up 
+Currency | Share Type / Class | Per Share
+Current No of Share | Current Paid Up Capital | Current Issued Share Capital
+Enter Reduce Shares | Enter Reduce Paid up Capital <-- to enter | Issued Share Capital (add, lock, calculate)
+Balance No Of Shares | Balance Paid up Capital | Balance Issued Share Capital (add, lock, calculate)
+-------------------------------------------------------------------------------------------
+Shareholders for Currency Share Type / Class
+Shareholder Name	| S.cert No.	| Current Share	| New C.cert No.
+
+
+
+
+Select Type: 2. Reduce paid up & Share
+Currency | Share Type / Class | Per Share
+Current No of Share | Current Paid Up Capital | Current Issued Share Capital
+Enter Reduce Shares <-- to enter | Enter Reduce Paid up Capital | Issued Share Capital (add, lock, calculate)
+Balance No Of Shares | Balance Paid up Capital | Balance Issued Share Capital (add, lock, calculate)
+-------------------------------------------------------------------------------------------
+Shareholders for Currency Share Type / Class
+Shareholder Name	| S.cert No.	| Current Share	| New C.cert No.
+
+
+
+
+Select Type: 3. Club & Reduce All (ADD NEW)
+Currency | Share Type / Class | Per Share (Blank)
+Current No of Share (All same currency + Share Type / Class Sum) | Current Paid Up Capital (All same currency + Share Type / Class Sum) | Current Issued Share Capital (All same currency + Share Type / Class Sum)
+Enter New Shares | Enter New Paid up Capital | Enter New Issued Share Capital
+-------------------------------------------------------------------------------------------
+All Shareholders for same currency Share Type / Class
+Shareholder Name	| S.cert No.	| Current Share	| New C.cert No. |  New No. of Shares | New Paid up Capital | New Issued Share Capital
+
+
+
+
+SGD | Ordinary | Blank
+200,000 | $2,140,000 | $2,140,000
+$25,000 | $250,000 | $250,000 -------------------- NEW (VALIDATE AGAINST SUM OF SHAREHOLDER TOTAL)
+-------------------------------------------------------------------------------------------
+Heng (lock) | SC 9 (lock) | 14,000 (lock) | SC 13 (add) existing | 5,000 (add) | $50,000 (lock, calculate) | $50,000 (lock, calculate) ------------------------ NEW (VALIDATE VALUES)
+Siong (lock) | SC 11 (lock) | 186,000 (sum, lock) | SC 12 (add) existing | 20,000 (add) | $200,000 (lock, calculate) | $200,000 (lock, calculate) ------------------------ NEW (VALIDATE VALUES)
+SAME SC SCENARIO [Siong | SC 11 | 126,000 | $126,000 | $126,000 | $1.00 , Siong | SC 11 | 60,000 | $2,000,000 | $2,000,000 | $33.333] 
+
+Heng (lock) | SC 9 (lock) | 14,000 (lock) | SC 13 (add) existing | 5,000 (add) | $50,000 (lock, calculate) | $50,000 (lock, calculate) ------------------------ NEW (VALIDATE VALUES)
+Siong (lock) | SC 11,12 (show, lock) | 186,000 (sum, lock) | SC 13 (add) existing | 20,000 (add) | $200,000 (lock, calculate) | $200,000 (lock, calculate) ------------------------ NEW (VALIDATE VALUES)
+DIFF SC SCENARIO [Siong | SC 11 | 126,000 | $126,000 | $126,000 | $1.00 , Siong | SC 12 | 60,000 | $2,000,000 | $2,000,000 | $33.333] 
+
+
+
+
+

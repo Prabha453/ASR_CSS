@@ -1,0 +1,469 @@
+/* ── Rich view — ceased overrides (active/pending/inactive come from IndividualList.css) ── */
+.il-rich-card.ceased                  { border-left-color: #f06548; }
+.il-rich-card.ceased .il-rich-serial  { color: #f06548; }
+.il-rich-card.ceased .il-rich-avatar  { box-shadow: 0 0 0 3px rgba(240,101,72,.3), 0 4px 12px rgba(240,101,72,.25); }
+.il-rich-card.ceased .il-rich-foot-date i { color: #f06548; }
+
+/* ── Toolbar ── */
+.olp-toolbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--vz-border-color);
+}
+.olp-search {
+  position: relative;
+  flex: 1 1 200px;
+  max-width: 320px;
+}
+.olp-search i {
+  position: absolute;
+  left: 9px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #878a99;
+  font-size: 13px;
+  pointer-events: none;
+}
+.olp-search input {
+  width: 100%;
+  padding: 6px 10px 6px 30px;
+  border: 1px solid var(--vz-border-color);
+  border-radius: 6px;
+  font-size: 12px;
+  color: var(--vz-body-color);
+  background: var(--vz-input-bg, var(--vz-light));
+  outline: none;
+  transition: border-color 0.15s;
+}
+.olp-search input:focus {
+  border-color: #405189;
+}
+.olp-count {
+  font-size: 11px;
+  font-weight: 600;
+  background: rgba(64, 81, 137, 0.1);
+  color: #405189;
+  border-radius: 10px;
+  padding: 2px 8px;
+  white-space: nowrap;
+}
+
+/* ── Table ── */
+.olp-table-wrap {
+  overflow-x: auto;
+}
+.olp-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+}
+.olp-table thead tr {
+  background: #eef0f8;
+  border-bottom: 1px solid #c8cde6;
+}
+.olp-table thead th {
+  padding: 7px 10px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #2c3558;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  background: #eef0f8;
+  border: none;
+  white-space: nowrap;
+  user-select: none;
+}
+.olp-table tbody tr {
+  border-bottom: 1px solid var(--vz-border-color);
+  transition: background 0.12s;
+}
+.olp-table tbody tr:last-child {
+  border-bottom: none;
+}
+.olp-table tbody tr:hover {
+  background: rgba(64, 81, 137, 0.03);
+}
+.olp-table tbody td {
+  padding: 6px 14px;
+  color: var(--vz-body-color);
+  vertical-align: middle;
+}
+.olp-table tbody tr.row-active td:first-child  { box-shadow: inset 3px 0 0 #0ab39c; }
+.olp-table tbody tr.row-ceased td:first-child  { box-shadow: inset 3px 0 0 #f06548; }
+
+/* ── Name cell ── */
+.olp-name-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.olp-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+}
+.olp-name-text b {
+  display: block;
+  font-weight: 500;
+  color: var(--vz-body-color);
+  font-size: 13px;
+}
+.olp-name-text small {
+  font-size: 11px;
+  color: #878a99;
+}
+
+/* ── Badges ── */
+.olp-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.olp-badge.active {
+  background: rgba(10, 179, 156, 0.12);
+  color: #0ab39c;
+}
+.olp-badge.ceased {
+  background: rgba(240, 101, 72, 0.1);
+  color: #f06548;
+}
+.olp-sub-chip {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 10px;
+  background: rgba(64, 81, 137, 0.08);
+  color: #405189;
+  border: 1px solid rgba(64, 81, 137, 0.15);
+}
+
+/* ── Type badge ── */
+.olp-type-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 20px;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+.olp-type-badge i { font-size: 12px; }
+
+/* ── Identification cell ── */
+.olp-id-cell {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+.olp-id-type {
+  font-size: 9.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: #878a99;
+  background: var(--vz-light, #f8f9fa);
+  border: 1px solid var(--vz-border-color);
+  border-radius: 4px;
+  padding: 1px 5px;
+  white-space: nowrap;
+}
+.olp-id-no {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--vz-body-color);
+  font-family: monospace;
+  letter-spacing: .02em;
+}
+
+/* ── Action buttons — IndividualList style ── */
+.olp-act-wrap {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.olp-act {
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.15s;
+  border: 1.5px solid transparent;
+  flex-shrink: 0;
+  background: none;
+}
+.olp-act.edit {
+  background: rgba(240, 178, 50, 0.1);
+  color: #e6a817;
+  border-color: rgba(240, 178, 50, 0.22);
+}
+.olp-act.delete {
+  background: rgba(240, 101, 72, 0.08);
+  color: #f06548;
+  border-color: rgba(240, 101, 72, 0.18);
+}
+.olp-act.edit:hover {
+  background: rgba(240, 178, 50, 0.22);
+  box-shadow: 0 2px 8px rgba(240, 178, 50, 0.2);
+}
+.olp-act.delete:hover {
+  background: rgba(240, 101, 72, 0.18);
+  box-shadow: 0 2px 8px rgba(240, 101, 72, 0.2);
+}
+
+/* ── More button + dropdown (Proxy / Nominator for directors) ── */
+.olp-act.more {
+  background: rgba(108, 117, 125, 0.08);
+  color: #6c757d;
+  border-color: rgba(108, 117, 125, 0.2);
+}
+.olp-act.more:hover {
+  background: rgba(108, 117, 125, 0.18);
+  box-shadow: 0 2px 8px rgba(108, 117, 125, 0.18);
+}
+.olp-more-menu {
+  position: fixed;
+  z-index: 1500;
+  background: var(--vz-card-bg, #fff);
+  border: 1px solid var(--vz-border-color, #e9ebec);
+  border-radius: 8px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.14);
+  padding: 4px 0;
+  min-width: 140px;
+  animation: olp-menu-in 0.13s ease;
+}
+@keyframes olp-menu-in {
+  from { opacity: 0; transform: translateY(-5px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.olp-more-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.1s;
+  color: var(--vz-body-color);
+}
+.olp-more-item:hover        { background: var(--vz-light); }
+.olp-more-item i            { font-size: 14px; width: 16px; flex-shrink: 0; }
+.olp-more-item.proxy        { color: #405189; }
+.olp-more-item.proxy i      { color: #405189; }
+.olp-more-item.nominator    { color: #0ab39c; }
+.olp-more-item.nominator i  { color: #0ab39c; }
+
+/* ── Card grid ── */
+.olp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px;
+  padding: 18px;
+}
+.olp-card {
+  background: var(--vz-card-bg);
+  border: 1px solid var(--vz-border-color);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: box-shadow 0.2s, transform 0.2s;
+  display: flex;
+  flex-direction: column;
+}
+.olp-card:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.09);
+  transform: translateY(-2px);
+}
+.olp-card-bar {
+  height: 4px;
+  border-radius: 10px 10px 0 0;
+}
+.olp-card-top {
+  padding: 18px 16px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border-bottom: 1px solid var(--vz-border-color);
+}
+.olp-card-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+.olp-card-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--vz-body-color);
+  margin-bottom: 3px;
+  line-height: 1.3;
+}
+.olp-card-id {
+  font-size: 11px;
+  color: #878a99;
+  margin-bottom: 6px;
+}
+.olp-card-body {
+  padding: 12px 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.olp-card-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+}
+.olp-card-lbl {
+  color: #878a99;
+}
+.olp-card-footer {
+  padding: 10px 14px;
+  border-top: 1px solid var(--vz-border-color);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  background: var(--vz-light);
+}
+.olp-card-subroles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 6px;
+  justify-content: center;
+}
+
+/* ── Empty state ── */
+.olp-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+}
+.olp-empty-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background: rgba(64, 81, 137, 0.08);
+  color: #405189;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  margin-bottom: 16px;
+}
+.olp-empty h6 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--vz-body-color);
+  margin-bottom: 6px;
+}
+.olp-empty p {
+  font-size: 12px;
+  color: #878a99;
+  margin: 0 0 14px;
+}
+
+/* ── Skeleton shimmer ── */
+.olp-skel td > div {
+  height: 14px;
+  border-radius: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--vz-border-color) 25%,
+    var(--vz-light) 50%,
+    var(--vz-border-color) 75%
+  );
+  background-size: 200% 100%;
+  animation: olp-shimmer 1.4s infinite;
+}
+@keyframes olp-shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── "All" section header ── */
+.olp-section-head {
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 14px 18px 6px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.olp-section-head::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(64, 81, 137, 0.12);
+}
+.olp-section-cnt {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 1px 7px;
+  border-radius: 10px;
+}
+
+/* ── Delete confirm modal ── */
+.olp-del-modal {
+  text-align: center;
+  padding: 10px 0;
+}
+.olp-del-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(240, 101, 72, 0.1);
+  color: #f06548;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin: 0 auto 14px;
+}
+.olp-del-modal h5 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.olp-del-modal p {
+  font-size: 12px;
+  color: #878a99;
+  margin: 0;
+}

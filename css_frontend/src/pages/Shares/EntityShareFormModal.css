@@ -1,0 +1,152 @@
+/* ── Modal wrapper ── */
+.esfm .modal-content {
+  border: none;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,.18);
+}
+
+/* ── Custom header ── */
+.esfm-hd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #405189 0%, #3a4a82 100%);
+}
+.esfm-hd-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1;
+}
+.esfm-hd-title i { font-size: 18px; opacity: .9; }
+.esfm-hd-close {
+  background: none;
+  border: none;
+  color: rgba(255,255,255,.7);
+  font-size: 20px;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  transition: background 0.15s, color 0.15s;
+}
+.esfm-hd-close:hover { color: #fff; background: rgba(255,255,255,.15); }
+
+.esfm-header-badge {
+  font-size: 10px;
+  font-weight: 700;
+  background: rgba(255,255,255,.18);
+  color: #fff;
+  padding: 3px 9px;
+  border-radius: 20px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+/* ── Body ── */
+.esfm .modal-body { padding: 24px 24px 8px; }
+
+/* ── Section label ── */
+.esfm-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.esfm-section-line {
+  flex: 1;
+  height: 1px;
+  background: var(--vz-border-color);
+}
+.esfm-section-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #878a99;
+  white-space: nowrap;
+}
+.esfm-section-label i { font-size: 13px; color: #405189; }
+
+/* ── Field label ── */
+.esfm-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #495057;
+  margin-bottom: 5px;
+  display: block;
+}
+
+/* ── Allotment type pills ── */
+.esfm-type-group { display: flex; gap: 6px; flex-wrap: wrap; }
+.esfm-type-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 1.5px solid var(--vz-border-color);
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.15s;
+  user-select: none;
+  background: transparent;
+}
+.esfm-type-pill input { display: none; }
+.esfm-type-pill:hover  { border-color: #405189; }
+.esfm-type-pill.active { background: rgba(64,81,137,.1); border-color: #405189; color: #405189; font-weight: 700; }
+.esfm-type-pill.guarantee { background: rgba(10,179,156,.1); border-color: #0ab39c; color: #0ab39c; font-weight: 700; cursor: default; }
+
+/* ── Calc strip ── */
+.esfm-calc {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: rgba(10,179,156,.06);
+  border: 1px solid rgba(10,179,156,.2);
+  margin-top: 12px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.esfm-calc-item { display: flex; flex-direction: column; gap: 2px; }
+.esfm-calc-item span { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; color: #0ab39c; }
+.esfm-calc-item b { font-size: 15px; font-weight: 700; color: var(--vz-body-color); }
+.esfm-calc-sep { width: 1px; height: 32px; background: rgba(10,179,156,.3); margin: 0 16px; }
+
+/* ── Footer ── */
+.esfm .modal-footer {
+  padding: 14px 22px;
+  border-top: 1px solid var(--vz-border-color);
+  background: rgba(64,81,137,.02);
+  gap: 10px;
+}
+.esfm-save-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 22px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 8px;
+}
+.esfm-cancel-btn {
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 8px;
+  padding: 8px 18px;
+}

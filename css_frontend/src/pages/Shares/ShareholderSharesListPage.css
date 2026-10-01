@@ -1,0 +1,743 @@
+/* ── Filter bar — reuse es-filter-bar pattern ───────────────────────────── */
+.ssl-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 10px 16px;
+  border-bottom: 1px solid #e9ebec;
+  background: #fafbfc;
+}
+
+/* ── Body ────────────────────────────────────────────────────────────────── */
+.ssl-body {
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.ssl-loading {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #878a99;
+  font-size: 14px;
+  min-height: 200px;
+}
+
+/* ── Group box — mirrors es-group-box ────────────────────────────────────── */
+.ssl-group {
+  border: 1.5px solid rgba(64,81,137,.25);
+  border-radius: 10px;
+}
+
+/* ── Group header — mirrors es-group-box-header ──────────────────────────── */
+.ssl-group-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 9px 14px;
+  background: rgba(64,81,137,.07);
+  border-bottom: 1px solid rgba(64,81,137,.18);
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.15s;
+}
+.ssl-group-header:hover { background: rgba(64,81,137,.11); }
+
+.ssl-group-header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.ssl-collapse-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #405189;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+
+/* ── Table ────────────────────────────────────────────────────────────────── */
+.ssl-table-wrap { overflow-x: auto; }
+
+.ssl-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+}
+
+.ssl-table thead tr {
+  background: #eef0f8;
+  border-bottom: 2px solid #c8cde6;
+}
+
+.ssl-table thead th {
+  padding: 7px 10px;
+  color: #2c3558;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  white-space: nowrap;
+  border: none;
+  text-align: left;
+}
+.ssl-table thead th.th-right { text-align: right; }
+
+.ssl-table tbody tr {
+  border-bottom: 1px solid #f0f2f5;
+  transition: background 0.12s, box-shadow 0.12s;
+  position: relative;
+}
+.ssl-table tbody tr:nth-child(even) { background: #fafbfd; }
+.ssl-table tbody tr:last-child { border-bottom: none; }
+.ssl-table tbody tr:hover {
+  background: #eef0f8 !important;
+  box-shadow: inset 3px 0 0 #405189;
+}
+
+.ssl-table tbody td {
+  padding: 7px 10px;
+  color: #3d4663;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.ssl-seq {
+  color: #a8b0c8;
+  font-size: 11px;
+  font-weight: 600;
+  text-align: center;
+  width: 32px;
+}
+
+/* Transaction type badge */
+.ssl-tx-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  border: 1px solid transparent;
+}
+.ssl-tx-badge.allotment    { background: rgba(44,53,88,.08);   color: #2c3558; border-color: rgba(44,53,88,.18); }
+.ssl-tx-badge.transfer     { background: rgba(10,179,156,.08); color: #089880; border-color: rgba(10,179,156,.2); }
+.ssl-tx-badge.transmission { background: rgba(101,89,204,.08); color: #5548bb; border-color: rgba(101,89,204,.2); }
+.ssl-tx-badge.conversion   { background: rgba(200,148,10,.08); color: #a07a05; border-color: rgba(200,148,10,.2); }
+.ssl-tx-badge.redemption   { background: rgba(231,76,94,.08);  color: #c0354e; border-color: rgba(231,76,94,.2); }
+.ssl-tx-badge.buyback      { background: rgba(231,76,94,.08);  color: #c0354e; border-color: rgba(231,76,94,.2); }
+.ssl-tx-badge.bonus        { background: rgba(10,179,156,.08); color: #089880; border-color: rgba(10,179,156,.2); }
+.ssl-tx-badge.opening      { background: rgba(44,53,88,.08);   color: #2c3558; border-color: rgba(44,53,88,.18); }
+.ssl-tx-badge.default      { background: #f0f2f5; color: #6b7399; border-color: #dde0ea; }
+
+.ssl-shareholder-name { font-weight: 700; color: #1e2a4a; font-size: 13px; }
+.ssl-shareholder-no   { font-size: 11px; color: #9aa0b8; margin-top: 2px; letter-spacing: .01em; }
+
+.ssl-num {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: #1e2a4a;
+}
+.ssl-num--muted { font-variant-numeric: tabular-nums; color: #8591a2; font-size: 12px; }
+.ssl-date-cell { color: #556080; font-size: 12px; font-weight: 500; letter-spacing: .01em; }
+
+
+/* Actions button — mirrors es-actions-btn */
+.ssl-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 28px;
+  padding: 0 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #405189;
+  background: rgba(64,81,137,.08);
+  border: 1.5px solid rgba(64,81,137,.2);
+  border-radius: 7px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s;
+}
+.ssl-action-btn:hover {
+  background: rgba(64,81,137,.16);
+  border-color: rgba(64,81,137,.35);
+}
+.ssl-action-btn i { font-size: 14px; }
+
+/* Totals row */
+.ssl-row--invalid td { color: #b8bdd4 !important; font-style: italic; }
+.ssl-row--invalid .ssl-num { color: #b8bdd4 !important; }
+
+
+
+/* Valid sub-label inside issued/paid-up chips */
+.ssl-chip-valid-sub {
+  display: block;
+  font-size: 10px;
+  font-weight: 600;
+  color: #0ab39c;
+  margin-top: 2px;
+  letter-spacing: .01em;
+}
+
+/* ── Usage summary footer below table ───────────────────────────────────── */
+.ssl-usage-footer {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: #f0f2f8;
+  border-top: 1.5px solid #e2e5f0;
+  border-radius: 0 0 8px 8px;
+  overflow: hidden;
+}
+.ssl-usage-footer-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: #2c3558;
+  white-space: nowrap;
+  flex-shrink: 0;
+  border-right: 1.5px solid #d0d5e8;
+}
+.ssl-usage-footer-title i { font-size: 13px; color: #405189; }
+.ssl-usage-footer-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 10px 16px;
+  border-right: 1px solid #dde0ea;
+}
+.ssl-usage-footer-item:last-child { border-right: none; }
+
+.ssl-usage-chip {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 160px;
+  padding: 0 4px;
+}
+.ssl-usage-chip-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+.ssl-usage-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: #8591a2;
+  white-space: nowrap;
+}
+.ssl-usage-ratio {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.ssl-usage-ratio b   { font-size: 13px; font-weight: 700; color: #2c3558; }
+.ssl-usage-of        { font-size: 11px; color: #a0a8c0; margin: 0 2px; }
+.ssl-usage-total     { font-size: 12px; font-weight: 600; color: #6b7399; }
+.ssl-usage-bar-track {
+  height: 5px;
+  background: #dde0ea;
+  border-radius: 99px;
+  overflow: hidden;
+}
+.ssl-usage-bar-fill {
+  height: 100%;
+  border-radius: 99px;
+  transition: width 0.4s ease;
+}
+
+/* Empty row */
+.ssl-empty-row td {
+  text-align: center;
+  padding: 28px 0;
+  color: #878a99;
+  font-size: 13px;
+}
+.ssl-empty-row i { font-size: 28px; display: block; margin-bottom: 6px; opacity: 0.3; }
+
+/* Add Allotment button in group header */
+.ssl-add-allotment-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 28px;
+  padding: 0 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  background: #0ab39c;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-left: auto;
+  transition: background 0.15s;
+}
+.ssl-add-allotment-btn:hover { background: #099886; }
+.ssl-add-allotment-btn i { font-size: 14px; }
+
+/* Smooth collapse using grid-template-rows — transitions on actual content height */
+.ssl-rows-wrap {
+  display: grid;
+  grid-template-rows: 1fr;
+  transition: grid-template-rows 0.28s ease;
+}
+.ssl-rows-wrap--collapsed {
+  grid-template-rows: 0fr;
+}
+.ssl-rows-inner {
+  overflow: visible;
+}
+.ssl-rows-wrap--collapsed .ssl-rows-inner {
+  overflow: hidden;
+}
+
+/* ── Compact chips inside shareholder list header ────────────────────────── */
+.ssl-group-hdr .es-gt-chip {
+  padding: 4px 10px 4px 8px;
+  gap: 7px;
+  min-width: 0;
+}
+.ssl-group-hdr .es-gt-chip.identity { min-width: 0; }
+
+/* ── Group header layout ─────────────────────────────────────────────────── */
+.ssl-group-hdr {
+  flex-wrap: nowrap !important;   /* override es-group-box-header wrap */
+  align-items: flex-start !important;
+}
+.ssl-hdr-left {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-width: 0;
+}
+.ssl-hdr-right {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-left: 8px;
+}
+
+/* ── Allotted / Balance chips ────────────────────────────────────────────── */
+.es-gt-chip.ssl-chip-allotted {
+  background: rgba(247,184,75,.12);
+  border-color: rgba(247,184,75,.3);
+  color: #b07d0c;
+}
+.es-gt-chip.ssl-chip-balance {
+  background: rgba(64,81,137,.07);
+  border-color: rgba(64,81,137,.18);
+  color: #405189;
+}
+
+/* ── Empty state (no company shares) ────────────────────────────────────── */
+.ssl-empty-state {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 260px;
+  color: #878a99;
+  text-align: center;
+  padding: 40px 20px;
+}
+.ssl-empty-state .ssl-empty-icon {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: rgba(64,81,137,.08); color: #405189;
+  font-size: 32px; display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 16px;
+}
+.ssl-empty-state h5 { font-size: 16px; font-weight: 600; color: #495057; margin-bottom: 6px; }
+.ssl-empty-state p  { font-size: 13px; margin-bottom: 0; }
+
+
+/* Status badge */
+.ssl-status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 9px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.ssl-status-badge.valid     { background: rgba(10,179,156,.1);  color: #0ab39c; border: 1px solid rgba(10,179,156,.2); }
+.ssl-status-badge.active    { background: rgba(10,179,156,.1);  color: #0ab39c; border: 1px solid rgba(10,179,156,.2); }
+.ssl-status-badge.invalid   { background: rgba(231,76,94,.08);  color: #e74c5e; border: 1px solid rgba(231,76,94,.2); }
+.ssl-status-badge.ceased    { background: rgba(240,101,72,.08); color: #f06548; border: 1px solid rgba(240,101,72,.18); }
+.ssl-status-badge.cancelled { background: rgba(240,101,72,.08); color: #f06548; border: 1px solid rgba(240,101,72,.18); }
+.ssl-status-badge.draft     { background: rgba(240,178,50,.1);  color: #c49a0a; border: 1px solid rgba(240,178,50,.2); }
+.ssl-status-badge.default   { background: #f0f2f5; color: #878a99; border: 1px solid #e2e5eb; }
+
+/* ── Transaction actions dropdown ────────────────────────────────────────── */
+.ssl-actions-wrap { position: relative; display: inline-block; }
+
+.ssl-actions-menu {
+  z-index: 9999;
+  background: #fff; border: 1.5px solid #e2e5eb; border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,.12);
+  min-width: 210px; padding: 4px 0;
+  animation: ssl-menu-in 0.12s ease;
+}
+@keyframes ssl-menu-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.ssl-actions-item {
+  display: flex; align-items: center; gap: 8px;
+  width: 100%; padding: 5px 12px;
+  background: none; border: none; cursor: pointer;
+  font-size: 12px; font-weight: 500; color: #495057;
+  text-align: left; transition: background 0.12s;
+}
+.ssl-actions-item:hover { background: rgba(64,81,137,.06); color: #405189; }
+.ssl-actions-item i { font-size: 15px; color: #878a99; }
+.ssl-actions-item:hover i { color: #405189; }
+/* ── Divider ── */
+.ssl-actions-divider { height: 1px; background: #eef0f7; margin: 3px 0; }
+
+/* ── Transaction group row ── */
+.ssl-actions-group-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 6px 12px; gap: 10px; transition: background .12s;
+}
+.ssl-actions-group-row:hover { background: rgba(64,81,137,.04); }
+.ssl-actions-group-lbl {
+  display: flex; align-items: center; gap: 7px;
+  font-size: 12.5px; font-weight: 500; color: #495057; white-space: nowrap;
+}
+.ssl-actions-group-lbl i { font-size: 15px; color: #878a99; }
+.ssl-actions-group-row:hover .ssl-actions-group-lbl { color: #405189; }
+.ssl-actions-group-row:hover .ssl-actions-group-lbl i { color: #405189; }
+.ssl-actions-group-btns { display: flex; gap: 4px; }
+
+/* Single / All pills */
+.ssl-actions-pill {
+  font-size: 11px; font-weight: 600; padding: 3px 9px;
+  border-radius: 20px; border: 1.5px solid #d0d5e8;
+  background: #f5f6fc; color: #6c757d; cursor: pointer; transition: all .15s;
+  white-space: nowrap;
+}
+.ssl-actions-pill:hover { border-color: #405189; color: #405189; background: #eef1fb; }
+.ssl-actions-pill--all { border-color: #405189; color: #405189; background: #f0f3ff; }
+.ssl-actions-pill--all:hover { background: #405189; color: #fff; }
+
+/* ── View Transaction Modal ───────────────────────────────────────────────── */
+.vtm-modal { border-radius: 14px; overflow: hidden; border: none; box-shadow: 0 8px 40px rgba(0,0,0,.18); }
+
+/* Header */
+.vtm-header { background: #fff; padding: 16px 20px 14px; }
+.vtm-header .modal-title { width: 100%; }
+.vtm-title-wrap {
+  display: flex; align-items: center; gap: 12px;
+}
+.vtm-title-icon {
+  width: 40px; height: 40px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; flex-shrink: 0;
+}
+.vtm-title { font-size: 15px; font-weight: 700; color: #344563; line-height: 1.2; }
+.vtm-subtitle { font-size: 12px; color: #878a99; font-weight: 500; margin-top: 1px; }
+.vtm-type-chip {
+  margin-left: auto;
+  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
+  padding: 4px 12px; border-radius: 20px;
+  white-space: nowrap;
+}
+
+/* Body */
+.vtm-body { padding: 0; background: #f4f6fa; }
+
+/* Banner — key figures row */
+.vtm-banner {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  background: #fff;
+  border-bottom: 1px solid #e9ebec;
+}
+.vtm-banner-stat {
+  display: flex; align-items: center; gap: 10px;
+  padding: 14px 16px;
+  border-right: 1px solid #f0f2f5;
+}
+.vtm-banner-stat:last-child { border-right: none; }
+.vtm-banner-stat > i {
+  font-size: 22px; flex-shrink: 0; opacity: 0.85;
+}
+.vtm-banner-stat div { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.vtm-banner-stat span { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: #adb5bd; }
+.vtm-banner-stat b { font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; }
+@media (max-width: 600px) {
+  .vtm-banner { grid-template-columns: repeat(2, 1fr); }
+  .vtm-banner-stat:nth-child(2) { border-right: none; }
+  .vtm-banner-stat:nth-child(3) { border-right: 1px solid #f0f2f5; }
+}
+
+/* Sections container */
+.vtm-sections { display: flex; flex-direction: column; gap: 10px; padding: 14px 16px; }
+
+/* Card */
+.vtm-card {
+  background: #fff;
+  border: 1.5px solid #e9ebec;
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+.vtm-card-title {
+  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
+  color: #405189;
+  display: flex; align-items: center; gap: 6px;
+  margin-bottom: 12px; padding-bottom: 10px;
+  border-bottom: 1px solid #f0f2f5;
+}
+.vtm-card-title i { font-size: 14px; }
+
+/* Field row inside cards */
+.vtm-row {
+  display: flex; gap: 0; flex-wrap: nowrap;
+}
+.vtm-field {
+  flex: 1; min-width: 0;
+  display: flex; flex-direction: column; gap: 4px;
+  padding: 0 14px;
+  border-right: 1px dashed #e9ebec;
+}
+.vtm-field:first-child { padding-left: 0; }
+.vtm-field:last-child { border-right: none; padding-right: 0; }
+.vtm-field--wide { flex: 1.8; }
+
+.vtm-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: #adb5bd; }
+.vtm-val { font-size: 13px; font-weight: 600; color: #495057; }
+.vtm-val--name { font-size: 14px; font-weight: 700; color: #344563; }
+.vtm-val--mono { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 12px; color: #6559cc; font-weight: 600; }
+.vtm-val--total { font-size: 14px; font-weight: 700; color: #405189; }
+
+/* Yes/No badges in modal */
+.vtm-badge {
+  display: inline-flex; align-items: center;
+  padding: 2px 10px; border-radius: 20px;
+  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em;
+}
+.vtm-badge--yes { background: rgba(10,179,156,.1); color: #0ab39c; border: 1px solid rgba(10,179,156,.2); }
+.vtm-badge--no  { background: #f0f2f5; color: #adb5bd; border: 1px solid #e2e5eb; }
+
+@media (max-width: 600px) {
+  .vtm-row { flex-wrap: wrap; gap: 12px 0; }
+  .vtm-field { flex: 1 1 45%; border-right: none; padding: 0; }
+  .vtm-field:not(:last-child)::after { display: none; }
+}
+
+/* ── Total Consideration column tooltip ──────────────────────────────────────── */
+.ssl-consid-wrap {
+  display: inline-flex; align-items: center; gap: 4px;
+  cursor: default;
+}
+.ssl-consid-total { text-decoration: underline dotted #c0c7d6; }
+.ssl-consid-tip--portal {
+  position: fixed;
+  transform: translate(-100%, -110%);
+  z-index: 9999;
+  min-width: 220px;
+  background: #fff; border: 1.5px solid #e4e7ef; border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0,0,0,.13);
+  padding: 10px 14px;
+  display: flex; flex-direction: column; gap: 6px;
+  pointer-events: none;
+}
+.ssl-consid-tip-row {
+  display: flex; justify-content: space-between; gap: 16px;
+  font-size: 12px; color: #495057; white-space: nowrap;
+}
+.ssl-consid-tip-row b { color: #344563; font-weight: 600; }
+
+/* ── Retain danger item ──────────────────────────────────────────────────── */
+.ssl-actions-item--danger { color: #e74c5e; border-top: 1px solid #fde8eb; margin-top: 2px; padding-top: 8px; }
+.ssl-actions-item--danger i { color: #e74c5e; }
+.ssl-actions-item--danger:hover { background: #fff5f6; color: #c0392b; }
+.ssl-actions-item--danger:hover i { color: #c0392b; }
+
+/* ── Retain confirm modal ────────────────────────────────────────────────── */
+.ssl-retain-overlay {
+  position: fixed; inset: 0; z-index: 9999;
+  background: rgba(0,0,0,.45);
+  display: flex; align-items: center; justify-content: center;
+}
+.ssl-retain-modal {
+  background: #fff; border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,.22);
+  padding: 32px 28px 24px;
+  max-width: 420px; width: 90%;
+  text-align: center;
+}
+.ssl-retain-icon {
+  font-size: 40px; color: #e74c5e;
+  background: #fff5f6; border-radius: 50%;
+  width: 68px; height: 68px;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 16px;
+}
+.ssl-retain-title { font-size: 18px; font-weight: 700; color: #212529; margin-bottom: 10px; }
+.ssl-retain-body  { font-size: 14px; color: #495057; line-height: 1.6; margin-bottom: 24px; }
+.ssl-retain-actions { display: flex; gap: 12px; justify-content: center; }
+.ssl-retain-cancel  {
+  padding: 9px 22px; border-radius: 7px; border: 1.5px solid #dee2e6;
+  background: #f8f9fa; color: #495057; font-size: 14px; font-weight: 500; cursor: pointer;
+}
+.ssl-retain-cancel:hover { background: #e9ecef; }
+.ssl-retain-confirm {
+  padding: 9px 22px; border-radius: 7px; border: none;
+  background: #e74c5e; color: #fff; font-size: 14px; font-weight: 600; cursor: pointer;
+  display: flex; align-items: center; gap: 6px;
+}
+.ssl-retain-confirm:hover { background: #c0392b; }
+.ssl-retain-confirm:disabled { opacity: .65; cursor: not-allowed; }
+.ssl-retain-modal--wide { max-width: 580px; text-align: left; }
+.ssl-retain-modal--wide .ssl-retain-icon,
+.ssl-retain-modal--wide .ssl-retain-title { text-align: center; margin-left: auto; margin-right: auto; }
+.ssl-retain-src-hdr {
+  font-size: 12px; font-weight: 600; color: #0ab39c;
+  background: #f0faf8; border: 1px solid #b7e9e0;
+  border-radius: 6px; padding: 7px 12px; margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.ssl-retain-src-loading {
+  font-size: 13px; color: #6c757d; padding: 12px 0;
+  display: flex; align-items: center; gap: 8px; justify-content: center;
+  margin-bottom: 14px;
+}
+.ssl-retain-src-scroll { overflow-x: auto; margin-bottom: 14px; }
+.ssl-retain-src-tbl {
+  width: 100%; border-collapse: collapse; font-size: 12.5px;
+}
+.ssl-retain-src-tbl th {
+  background: #f8f9fc; padding: 6px 10px;
+  font-size: 10.5px; font-weight: 700; color: #6c757d;
+  text-transform: uppercase; letter-spacing: .4px;
+  text-align: left; border-bottom: 1.5px solid #e2e5ef; white-space: nowrap;
+}
+.ssl-retain-src-tbl th.ta-r,
+.ssl-retain-src-tbl td.ta-r { text-align: right; }
+.ssl-retain-src-tbl td {
+  padding: 7px 10px; border-bottom: 1px solid #f0f2f8;
+  color: #212529; white-space: nowrap;
+}
+.ssl-retain-src-tbl tr:last-child td { border-bottom: none; }
+.ssl-retain-warn {
+  font-size: 12px; color: #e74c5e; background: #fff5f6;
+  border: 1px solid #f5c6cb; border-radius: 6px;
+  padding: 8px 12px; margin-bottom: 20px; text-align: center;
+}
+.ssl-spin { animation: ssl-spin 1s linear infinite; }
+@keyframes ssl-spin { to { transform: rotate(360deg); } }
+
+/* ── Transfer role pill (Balance / Received) ────────────────────────────── */
+.ssl-role-pill {
+  font-size: 10px; font-weight: 600; letter-spacing: .3px;
+  border-radius: 4px; padding: 1px 6px; text-transform: uppercase;
+}
+.ssl-role--balance  { background: #fff0f2; color: #e74c5e; }
+.ssl-role--received { background: #ecfdf9; color: #0ab39c; }
+
+/* ── Transfer full-path flow (Remo → Alex) inline ───────────────────────── */
+.ssl-type-col {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 3px;
+}
+.ssl-type-sub {
+  display: flex; align-items: center; gap: 4px; flex-wrap: nowrap; overflow: hidden;
+}
+.ssl-transfer-flow {
+  display: inline-flex; align-items: center; gap: 3px;
+  font-size: 11px; font-weight: 500; color: #495057; white-space: nowrap; overflow: hidden;
+}
+.ssl-transfer-flow-name {
+  max-width: 55px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  border-radius: 4px; padding: 1px 4px;
+}
+.ssl-transfer-flow-from { background: #fff0f2; color: #e74c5e; }
+.ssl-transfer-flow-to   { background: #ecfdf9; color: #0ab39c; }
+.ssl-transfer-flow-arrow { font-size: 11px; color: #878a99; flex-shrink: 0; }
+
+/* ── Shareholder History modal ──────────────────────────────────────────── */
+.ssl-history-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,.45);
+  z-index: 1060; display: flex; align-items: center; justify-content: center;
+}
+.ssl-history-modal {
+  background: #fff; border-radius: 12px; width: 90%; max-width: 900px;
+  max-height: 85vh; display: flex; flex-direction: column;
+  box-shadow: 0 20px 60px rgba(0,0,0,.25); overflow: hidden;
+}
+.ssl-history-header {
+  display: flex; align-items: center; gap: 10px;
+  padding: 14px 18px; border-bottom: 1px solid #e9ebec;
+  background: #f8f9fc;
+}
+.ssl-history-title {
+  font-size: 15px; font-weight: 700; color: #1e2a4a;
+  display: flex; align-items: center; gap: 7px;
+}
+.ssl-history-title i { color: #405189; font-size: 18px; }
+.ssl-history-subtitle {
+  font-size: 13px; color: #405189; font-weight: 600;
+  background: #eef0f8; border-radius: 6px; padding: 2px 10px;
+}
+.ssl-history-close {
+  margin-left: auto; background: none; border: none; cursor: pointer;
+  font-size: 20px; color: #878a99; display: flex; align-items: center;
+}
+.ssl-history-close:hover { color: #e74c5e; }
+.ssl-history-body { overflow-y: auto; flex: 1; }
+.ssl-history-loading,
+.ssl-history-empty {
+  display: flex; align-items: center; justify-content: center;
+  gap: 8px; padding: 40px; color: #878a99; font-size: 13px;
+}
+.ssl-history-table {
+  width: 100%; border-collapse: collapse; font-size: 12.5px;
+}
+.ssl-history-table thead tr { background: #eef0f8; border-bottom: 2px solid #c8cde6; }
+.ssl-history-table thead th {
+  padding: 7px 10px; color: #2c3558; font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .07em; white-space: nowrap; text-align: left;
+}
+.ssl-history-table thead th.th-right { text-align: right; }
+.ssl-history-table tbody tr { border-bottom: 1px solid #f0f2f5; }
+.ssl-history-table tbody tr:last-child { border-bottom: none; }
+.ssl-history-table tbody tr:hover { background: #eef0f8; }
+.ssl-history-table tbody td { padding: 7px 10px; color: #3d4663; vertical-align: middle; white-space: nowrap; }
+.ssl-history-row--invalid td { opacity: .5; }
+.ssl-history-seq  { color: #a8b0c8; font-size: 11px; font-weight: 600; text-align: center; width: 28px; }
+.ssl-history-date { color: #556080; font-size: 12px; font-weight: 500; }
+.ssl-history-type-col { display: flex; flex-direction: column; gap: 3px; }

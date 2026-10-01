@@ -1,0 +1,375 @@
+/* ── Full-height page chain ──
+   This page manages its own sticky footer, so it claims the entire
+   viewport (minus the global topbar padding already baked into
+   .page-content) instead of leaving a dead gap below a fixed-height
+   card. Every link in the chain is flex + min-height:0 so the browser
+   computes the exact available height — no magic-number guessing. */
+.cw-page {
+  height: 100vh;
+  box-sizing: border-box;
+  padding-bottom: 12px !important; /* no global footer on this page — reclaim its reserved space */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* The global app footer (.footer, from Layouts/Footer.js) is
+   position:absolute + bottom:0 — it floats over the viewport bottom
+   regardless of document flow, and its Redux-driven visibility toggle
+   (footerVisibility) races with Layout's own async loadThemeSettings()
+   call, which can silently flip it back to visible on a fresh mount.
+   Hiding it here is synchronous, unconditional, and can't be clobbered
+   by that race — it's gone for as long as .cw-page is on screen. */
+body:has(.cw-page) .footer {
+  display: none !important;
+}
+.cw-page .cw-page-container {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+.cw-page .cw-page-card {
+  flex: 1;
+  min-height: 0;
+  margin-bottom: 0; /* the theme's default .card margin-bottom (1.5rem) would
+                       otherwise leave a small gap below the wizard */
+}
+
+/* ── Outer layout: nav | content | scanner ── */
+.cw-page .cw-outer {
+  display: grid;
+  grid-template-columns: 220px 1fr 0px;
+  transition: grid-template-columns 0.35s ease;
+  flex: 1;
+  min-height: 0;
+}
+.cw-page .cw-outer.scanner-open {
+  grid-template-columns: 220px 1fr 320px;
+}
+
+/* ── Left nav ── */
+.cw-page .cw-nav {
+  background: var(--vz-light);
+  border-right: 1px solid var(--vz-border-color);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  min-height: 0; /* grid items default to min-height:auto, which lets content
+                    push them taller than their track — this forces .cw-nav
+                    to actually respect the height .cw-outer's grid gives it */
+}
+.cw-page .cw-nav-header {
+  padding: 14px 18px 12px;
+  border-bottom: 1px solid var(--vz-border-color);
+}
+.cw-page .cw-nav-header h5 {
+  margin: 0; font-size: 13px; font-weight: 600; color: var(--vz-body-color);
+}
+.cw-page .cw-nav-header p {
+  margin: 3px 0 0; font-size: 11px;
+  color: var(--vz-sidebar-sub-item-color, #878a99);
+}
+.cw-page .cw-nav-body { padding: 10px 0; flex: 1; }
+.cw-page .cw-nav-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 18px; cursor: pointer;
+  border-left: 3px solid transparent;
+  transition: all 0.15s;
+}
+.cw-page .cw-nav-item:hover:not(.disabled) { background: var(--vz-card-bg); }
+.cw-page .cw-nav-item.active  { background: var(--vz-card-bg); border-left-color: #0ab39c; }
+.cw-page .cw-nav-item.disabled{ cursor: not-allowed; opacity: 0.45; }
+.cw-page .cw-nav-circle {
+  width: 30px; height: 30px; border-radius: 50%;
+  border: 2px solid var(--vz-border-color);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 600;
+  color: var(--vz-secondary-color); background: var(--vz-card-bg);
+  flex-shrink: 0; transition: all 0.2s;
+}
+.cw-page .cw-nav-item.done   .cw-nav-circle { background:#405189; border-color:#405189; color:#fff; }
+.cw-page .cw-nav-item.active .cw-nav-circle { background:#0ab39c; border-color:#0ab39c; color:#fff; box-shadow:0 0 0 4px rgba(10,179,156,.15); }
+.cw-page .cw-nav-text { flex: 1; min-width: 0; }
+.cw-page .cw-nav-text b {
+  display: block; font-size: 12px; font-weight: 500;
+  color: var(--vz-body-color); white-space: nowrap;
+  overflow: hidden; text-overflow: ellipsis;
+}
+.cw-page .cw-nav-item.active .cw-nav-text b { color: #0ab39c; }
+.cw-page .cw-nav-text small {
+  display: block; font-size: 10px;
+  color: var(--vz-sidebar-sub-item-color, #878a99); margin-top: 1px;
+}
+.cw-page .cw-nav-status { font-size: 10px; font-weight: 500; }
+.cw-page .cw-nav-status.done    { color: #0ab39c; }
+.cw-page .cw-nav-status.active  { color: #0ab39c; }
+.cw-page .cw-nav-status.pending { color: var(--vz-sidebar-sub-item-color, #878a99); }
+.cw-page .cw-connector {
+  width: 2px; height: 16px; background: var(--vz-border-color);
+  margin: 0 0 0 32px; transition: background 0.3s;
+}
+.cw-page .cw-connector.done { background: #405189; }
+.cw-page .cw-nav-footer {
+  padding: 12px 18px;
+  border-top: 1px solid var(--vz-border-color);
+  font-size: 11px;
+  color: var(--vz-sidebar-sub-item-color);
+}
+
+/* ── Center content ── */
+.cw-page .cw-content {
+  display: flex; flex-direction: column;
+  background: var(--vz-card-bg); overflow: hidden;
+  border-right: 1px solid var(--vz-border-color);
+  min-height: 0; /* same fix as .cw-nav — without this, .cw-content-body's
+                    long field lists push .cw-content taller than its grid
+                    track, and the sticky footer ends up overlapping the
+                    clipped tail of the scrollable content instead of
+                    sitting cleanly below it. */
+}
+.cw-page .cw-content-header {
+  padding: 12px 18px; flex-shrink: 0;
+  border-bottom: 1px solid var(--vz-border-color);
+  display: flex; align-items: center; gap: 12px;
+}
+.cw-page .cw-content-hicon {
+  width: 36px; height: 36px; border-radius: 9px; flex-shrink: 0;
+  background: #405189; color: #fff;
+  display: flex; align-items: center; justify-content: center; font-size: 16px;
+}
+.cw-page .cw-content-htitle { font-size: 14px; font-weight: 600; color: var(--vz-body-color); margin: 0; }
+.cw-page .cw-content-hsub   { font-size: 11px; color: var(--vz-sidebar-sub-item-color, #878a99); margin: 2px 0 0; }
+.cw-page .cw-content-body   {
+  padding: 18px 20px;
+  flex: 1;
+  min-height: 0; /* THE fix: flex items default to min-height:auto, so
+                    without this .cw-content-body ignores flex:1 and
+                    expands to its full intrinsic content height instead
+                    of the space actually available — pushing the footer
+                    off-screen instead of scrolling internally. */
+  overflow-y: auto;
+}
+/* ── Bottom action bar: [Previous  Next] on the left, Save on the right ── */
+.cw-page .cw-content-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 50px;
+  flex-shrink: 0; /* last item in .cw-content's flex column — with
+                     .cw-content-body correctly shrunk via min-height:0
+                     up the chain, plain flow already keeps this pinned
+                     at the bottom without needing position:sticky/fixed */
+  border-top: 1px solid #c8ccd1;
+  background: var(--vz-light);
+  box-shadow: 0 -2px 8px rgba(0,0,0,.04);
+}
+.cw-page .cw-footer-left-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Global Save — deliberately compact (never a wide full-width primary
+   button) so it reads as "the one important action" without dominating
+   the footer. */
+.cw-page .cw-footer-save {
+  min-width: 96px;
+  padding: 6px 20px !important;
+  font-weight: 600;
+  background: #0ab39c !important;
+  border-color: #0ab39c !important;
+  color: #fff !important;
+  transition: background-color .15s ease, border-color .15s ease, transform .1s ease, box-shadow .15s ease;
+}
+.cw-page .cw-footer-save:hover:not(:disabled) {
+  background: #089987 !important;
+  border-color: #089987 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(10,179,156,.35);
+}
+.cw-page .cw-footer-save:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: none;
+}
+.cw-page .cw-footer-save:disabled {
+  background: var(--vz-border-color) !important;
+  border-color: var(--vz-border-color) !important;
+  color: var(--vz-sidebar-sub-item-color, #878a99) !important;
+  opacity: 1;
+}
+
+/* Next intentionally shares Previous's plain "light" Bootstrap styling
+   (color="light" in JSX) — they're a matched navigation pair; only Save
+   carries an accent color. */
+.cw-page .cw-footer-prev,
+.cw-page .cw-footer-next-btn {
+  transition: transform .1s ease, box-shadow .15s ease;
+}
+.cw-page .cw-footer-prev:hover:not(:disabled),
+.cw-page .cw-footer-next-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(0,0,0,.12);
+}
+.cw-page .cw-footer-prev:active:not(:disabled),
+.cw-page .cw-footer-next-btn:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.cw-page .cw-progress-wrap  { display: flex; align-items: center; gap: 8px; }
+.cw-page .cw-progress-bar   { width: 100px; height: 4px; border-radius: 2px; background: var(--vz-border-color); }
+.cw-page .cw-progress-fill  { height: 100%; border-radius: 2px; background: #405189; transition: width 0.3s; }
+.cw-page .cw-progress-text  { font-size: 11px; color: var(--vz-sidebar-sub-item-color, #878a99); }
+
+@media (max-width: 576px) {
+  .cw-page .cw-content-footer { padding: 8px 10px; }
+  .cw-page .cw-footer-prev,
+  .cw-page .cw-footer-next-btn { padding: 6px 10px !important; font-size: 12px; }
+  .cw-page .cw-footer-save { min-width: 76px; padding: 6px 14px !important; }
+}
+
+/* ── Scanner toggle button in header ── */
+.cw-page .cw-scan-btn {
+  display: flex; align-items: center; gap: 6px;
+  padding: 5px 12px; border-radius: 6px; cursor: pointer;
+  font-size: 11px; font-weight: 500;
+  border: 1.5px solid #405189;
+  background: transparent; color: #405189;
+  transition: all 0.2s; white-space: nowrap;
+}
+.cw-page .cw-scan-btn.active {
+  background: #405189; color: #fff;
+}
+.cw-page .cw-scan-btn:hover { opacity: 0.85; }
+
+/* ── Prefill badge ── */
+.cw-page .cw-prefilled-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 10px; font-weight: 500; padding: 2px 8px;
+  border-radius: 20px; margin-left: 8px;
+  background: rgba(10,179,156,.1); color: #0ab39c;
+}
+
+/* ── Right scanner panel ── */
+.cw-page .cw-scanner {
+  background: var(--vz-light);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  min-height: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease 0.05s;
+}
+.cw-page .cw-outer.scanner-open .cw-scanner { opacity: 1; }
+.cw-page .cw-scanner-head {
+  padding: 12px 16px; flex-shrink: 0;
+  border-bottom: 1px solid var(--vz-border-color);
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--vz-card-bg);
+}
+.cw-page .cw-scanner-head span {
+  font-size: 12px; font-weight: 600; color: var(--vz-body-color);
+  display: flex; align-items: center; gap: 6px;
+}
+.cw-page .cw-scanner-head span i { color: #405189; font-size: 14px; }
+.cw-page .cw-scanner-close {
+  background: none; border: none; cursor: pointer;
+  font-size: 16px; color: var(--vz-sidebar-sub-item-color, #878a99);
+  padding: 2px; line-height: 1; transition: color 0.15s;
+}
+.cw-page .cw-scanner-close:hover { color: var(--vz-body-color); }
+.cw-page .cw-scanner-body { padding: 14px; flex: 1; overflow-y: auto; }
+
+/* Drop zone */
+.cw-page .cw-drop {
+  border: 2px dashed var(--vz-border-color);
+  border-radius: 10px; padding: 28px 16px;
+  text-align: center; cursor: pointer;
+  transition: all 0.2s; background: var(--vz-card-bg);
+  margin-bottom: 12px;
+}
+.cw-page .cw-drop:hover,
+.cw-page .cw-drop.dragover {
+  border-color: #405189;
+  background: rgba(64,81,137,.04);
+}
+.cw-page .cw-drop-icon {
+  width: 48px; height: 48px; border-radius: 12px;
+  background: rgba(64,81,137,.1); color: #405189;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; margin: 0 auto 10px;
+}
+.cw-page .cw-drop h6  { font-size: 13px; font-weight: 600; color: var(--vz-body-color); margin-bottom: 4px; }
+.cw-page .cw-drop p   { font-size: 11px; color: var(--vz-sidebar-sub-item-color, #878a99); margin: 0; }
+.cw-page .cw-drop-fmts { display: flex; justify-content: center; gap: 6px; margin-top: 10px; }
+.cw-page .cw-drop-fmt  {
+  font-size: 10px; font-weight: 500; padding: 2px 8px;
+  border-radius: 20px; background: var(--vz-light);
+  color: var(--vz-sidebar-sub-item-color, #878a99);
+  border: 1px solid var(--vz-border-color);
+}
+
+/* File preview */
+.cw-page .cw-file-prev {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 12px; border-radius: 8px;
+  border: 1px solid var(--vz-border-color);
+  background: var(--vz-card-bg); margin-bottom: 10px;
+}
+.cw-page .cw-file-icon {
+  width: 36px; height: 36px; border-radius: 8px;
+  background: rgba(64,81,137,.1); color: #405189;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0;
+}
+.cw-page .cw-file-info { flex: 1; min-width: 0; }
+.cw-page .cw-file-info b     { display: block; font-size: 12px; font-weight: 500; color: var(--vz-body-color); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cw-page .cw-file-info small { font-size: 10px; color: var(--vz-sidebar-sub-item-color, #878a99); }
+.cw-page .cw-file-remove     { background: none; border: none; cursor: pointer; font-size: 15px; color: var(--vz-sidebar-sub-item-color, #878a99); padding: 2px; }
+.cw-page .cw-file-remove:hover { color: #f06548; }
+
+/* OCR button */
+.cw-page .cw-ocr-btn {
+  width: 100%; padding: 9px; border-radius: 7px; border: none;
+  background: #405189; color: #fff;
+  font-size: 12px; font-weight: 500; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+  transition: opacity 0.2s;
+}
+.cw-page .cw-ocr-btn:disabled { opacity: .5; cursor: not-allowed; }
+.cw-page .cw-ocr-btn:hover:not(:disabled) { opacity: .88; }
+
+/* Tips */
+.cw-page .cw-tips {
+  margin-top: 12px; padding: 12px;
+  border-radius: 8px; background: var(--vz-card-bg);
+  border: 1px solid var(--vz-border-color);
+}
+.cw-page .cw-tips h6 { font-size: 11px; font-weight: 600; color: var(--vz-body-color); margin-bottom: 7px; }
+.cw-page .cw-tip { display: flex; align-items: center; gap: 7px; font-size: 10px; color: var(--vz-sidebar-sub-item-color, #878a99); margin-bottom: 4px; }
+.cw-page .cw-tip i  { color: #405189; font-size: 12px; flex-shrink: 0; }
+
+/* Section blocks */
+.cw-page .cw-section { border: 1px solid var(--vz-border-color); border-radius: 8px; margin-bottom: 14px; overflow: hidden; }
+.cw-page .cw-section-head { display: flex; align-items: center; gap: 8px; padding: 9px 14px; background: var(--vz-light); border-bottom: 1px solid var(--vz-border-color); }
+.cw-page .cw-section-dot  { width: 7px; height: 7px; border-radius: 50%; background: #405189; flex-shrink: 0; }
+.cw-page .cw-section-head span { font-size: 12px; font-weight: 600; color: var(--vz-body-color); }
+.cw-page .cw-section-body { padding: 16px; }
+
+/* Checkbox cards */
+.cw-page .cw-cb-group { display: flex; flex-wrap: wrap; gap: 8px; }
+.cw-page .cw-cb { display: flex; align-items: center; gap: 8px; padding: 7px 14px; cursor: pointer; border: 1.5px solid var(--vz-border-color); border-radius: 6px; font-size: 13px; font-weight: 500; color: var(--vz-body-color); transition: all 0.15s; user-select: none; }
+.cw-page .cw-cb:hover { border-color: #405189; }
+.cw-page .cw-cb.checked { border-color: #405189; background: rgba(64,81,137,0.08); color: #405189; }
+.cw-page .cw-cb-box { width: 16px; height: 16px; border-radius: 4px; flex-shrink: 0; border: 2px solid currentColor; background: transparent; display: flex; align-items: center; justify-content: center; }
+.cw-page .cw-cb.checked .cw-cb-box { background: #405189; border-color: #405189; }
+
+/* Prefilled field highlight */
+.cw-page .prefilled-field .form-control,
+.cw-page .prefilled-field .form-select {
+  border-color: #0ab39c !important;
+  background: rgba(10,179,156,.05) !important;
+}
+
+.wizard_wrap_ {
+  padding-bottom: 0px !important;
+}
