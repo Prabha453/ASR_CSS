@@ -1,86 +1,80 @@
 import React, { useState } from 'react';
-import { Col, Dropdown, DropdownMenu, DropdownToggle, Row } from 'reactstrap';
-
-//import images
-import github from "../../assets/images/brands/github.png";
-import bitbucket from "../../assets/images/brands/bitbucket.png";
-import dribbble from "../../assets/images/brands/dribbble.png";
-import dropbox from "../../assets/images/brands/dropbox.png";
-import mail_chimp from "../../assets/images/brands/mail_chimp.png";
-import slack from "../../assets/images/brands/slack.png";
+import { Dropdown, DropdownMenu, DropdownToggle } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
+// Quick Access launcher (top bar grid icon) — shortcuts to the most-used pages
+const QUICK_LINKS = [
+  { label: 'Entities',     icon: 'ri-building-line',       color: '#405189', to: '/company/list' },
+  { label: 'Individuals',  icon: 'ri-user-3-line',         color: '#0ab39c', to: '/individuals' },
+  { label: 'Officials',    icon: 'ri-team-line',           color: '#6559cc', to: '/officials/entity' },
+  { label: 'Events',       icon: 'ri-calendar-event-line', color: '#f7b84b', to: '/compliance/events' },
+  { label: 'Due Dates',    icon: 'ri-alarm-warning-line',  color: '#f06548', to: '/compliance/due-date-tracker' },
+  { label: 'Reports',      icon: 'ri-file-chart-line',     color: '#299cdb', to: '/reports/company/company-hierarchy' },
+  { label: 'Form Builder', icon: 'ri-file-list-3-line',    color: '#3577f1', to: '/form-builder/form-template' },
+  { label: 'Users',        icon: 'ri-user-settings-line',  color: '#e83e8c', to: '/user-management/users' },
+  { label: 'Settings',     icon: 'ri-settings-3-line',     color: '#878a99', to: '/settings' },
+];
+
+const quickAccessStyles = `
+  .qa-menu { width: 300px; }
+  .qa-head {
+    display: flex; align-items: center; gap: 8px;
+    padding: 12px 16px; border-bottom: 1px dashed var(--vz-border-color);
+  }
+  .qa-head i { font-size: 16px; color: var(--vz-primary, #405189); }
+  .qa-head h6 { margin: 0; font-size: 14px; font-weight: 600; }
+  .qa-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; padding: 8px; }
+  .qa-tile {
+    display: flex; flex-direction: column; align-items: center; gap: 7px;
+    padding: 12px 4px 10px; border-radius: 8px;
+    font-size: 12px; font-weight: 500; color: var(--vz-body-color); text-decoration: none;
+    transition: background .15s, color .15s;
+  }
+  .qa-tile:hover { background: var(--vz-light, #f3f6f9); color: var(--qa-color); }
+  .qa-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 19px; color: var(--qa-color); background: var(--qa-soft);
+    transition: transform .15s, background .15s, color .15s;
+  }
+  .qa-tile:hover .qa-icon { transform: translateY(-2px); background: var(--qa-color); color: #fff; }
+`;
+
 const WebAppsDropdown = () => {
-    const [isWebAppDropdown, setIsWebAppDropdown] = useState(false);
-    const toggleWebAppDropdown = () => {
-        setIsWebAppDropdown(!isWebAppDropdown);
-    };
-    return (
-        <React.Fragment>
-            <Dropdown isOpen={isWebAppDropdown} toggle={toggleWebAppDropdown} className="topbar-head-dropdown ms-1 header-item">
-                <DropdownToggle tag="button" type="button" className="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle">
-                    <i className='bx bx-category-alt fs-22'></i>
-                </DropdownToggle>
-                <DropdownMenu className="dropdown-menu-lg p-0 dropdown-menu-end">
-                    <div className="p-3 border-top-0 border-start-0 border-end-0 border-dashed border">
-                        <Row className="align-items-center">
-                            <Col>
-                                <h6 className="m-0 fw-semibold fs-15"> Web Apps </h6>
-                            </Col>
-                            <div className="col-auto">
-                                <Link to="#" className="btn btn-sm btn-soft-info"> View All Apps
-                                    <i className="ri-arrow-right-s-line align-middle"></i></Link>
-                            </div>
-                        </Row>
-                    </div>
+  const [isOpen, setIsOpen] = useState(false);
+  const toggle = () => setIsOpen(o => !o);
 
-                    <div className="p-2">
-                        <div className="row g-0">
-                            <Col>
-                                <Link className="dropdown-icon-item" to="#">
-                                    <img src={github} alt="Github" />
-                                    <span>GitHub</span>
-                                </Link>
-                            </Col>
-                            <Col>
-                                <Link className="dropdown-icon-item" to="#">
-                                    <img src={bitbucket} alt="bitbucket" />
-                                    <span>Bitbucket</span>
-                                </Link>
-                            </Col>
-                            <Col>
-                                <Link className="dropdown-icon-item" to="#">
-                                    <img src={dribbble} alt="dribbble" />
-                                    <span>Dribbble</span>
-                                </Link>
-                            </Col>
-                        </div>
-
-                        <div className="row g-0">
-                            <Col>
-                                <Link className="dropdown-icon-item" to="#">
-                                    <img src={dropbox} alt="dropbox" />
-                                    <span>Dropbox</span>
-                                </Link>
-                            </Col>
-                            <Col>
-                                <Link className="dropdown-icon-item" to="#">
-                                    <img src={mail_chimp} alt="mail_chimp" />
-                                    <span>Mail Chimp</span>
-                                </Link>
-                            </Col>
-                            <Col>
-                                <Link className="dropdown-icon-item" to="#">
-                                    <img src={slack} alt="slack" />
-                                    <span>Slack</span>
-                                </Link>
-                            </Col>
-                        </div>
-                    </div>
-                </DropdownMenu>
-            </Dropdown>
-        </React.Fragment>
-    );
+  return (
+    <React.Fragment>
+      <style>{quickAccessStyles}</style>
+      <Dropdown isOpen={isOpen} toggle={toggle} className="topbar-head-dropdown ms-1 header-item">
+        <DropdownToggle tag="button" type="button" title="Quick Access"
+          className="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle">
+          <i className='bx bx-category-alt fs-22'></i>
+        </DropdownToggle>
+        <DropdownMenu className="qa-menu p-0 dropdown-menu-end">
+          <div className="qa-head">
+            <i className="ri-flashlight-line"></i>
+            <h6>Quick Access</h6>
+          </div>
+          <div className="qa-grid">
+            {QUICK_LINKS.map(link => (
+              <Link
+                key={link.to}
+                to={link.to}
+                className="qa-tile"
+                style={{ '--qa-color': link.color, '--qa-soft': `${link.color}1a` }}
+                onClick={() => setIsOpen(false)}
+              >
+                <span className="qa-icon"><i className={link.icon}></i></span>
+                {link.label}
+              </Link>
+            ))}
+          </div>
+        </DropdownMenu>
+      </Dropdown>
+    </React.Fragment>
+  );
 };
 
 export default WebAppsDropdown;

@@ -1,0 +1,21 @@
+/* ── Settings tab bar: wrapping tab chips ── */
+.stab-wrap { margin-bottom: 14px; padding-bottom: 14px; border-bottom: 1px solid var(--vz-border-color); }
+.stab-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.stab {
+  white-space: nowrap;
+  padding: 6px 14px; border-radius: 20px;
+  border: 1px solid var(--vz-border-color); background: var(--vz-card-bg, #fff);
+  font-size: 12.5px; font-weight: 500; color: var(--vz-body-color);
+  cursor: pointer; transition: color .15s, background .15s, border-color .15s, box-shadow .15s;
+}
+.stab:hover { border-color: var(--stab-color); color: var(--stab-color); background: var(--stab-soft); }
+.stab.active {
+  color: #fff; font-weight: 600; border-color: var(--stab-color); background: var(--stab-color);
+  box-shadow: 0 3px 8px -2px var(--stab-shadow);
+}
+.stab { position: relative; }
+.stab-alert {
+  position: absolute; top: 3px; right: 5px;
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #f06548; box-shadow: 0 0 0 2px var(--vz-card-bg, #fff);
+}

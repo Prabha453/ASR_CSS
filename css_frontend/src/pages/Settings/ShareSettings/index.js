@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import {
-  Nav, NavItem, NavLink, TabContent, TabPane,
+  TabContent, TabPane,
   Button, Col, Spinner, Alert,
 } from 'reactstrap';
-import classnames from 'classnames';
+import SettingsTabBar from '../Components/SettingsTabBar';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
@@ -53,7 +53,7 @@ const EMPTY_VALUES = {
   cp_authorized_captial_countries:         [],
 };
 
-const ShareSettings = () => {
+const ShareSettings = ({ section }) => {
   const dispatch = useDispatch();
 
   const [activeTab,       setActiveTab]       = useState('decimal-settings');
@@ -143,19 +143,12 @@ const ShareSettings = () => {
         </Alert>
       )}
 
-      <Nav pills className="nav-customs nav-danger mb-3">
-        {TABS.map(tab => (
-          <NavItem key={tab.id}>
-            <NavLink
-              style={{ cursor: 'pointer' }}
-              className={classnames({ active: activeTab === tab.id })}
-              onClick={() => setActiveTab(tab.id)}
-            >
-              {tab.label}
-            </NavLink>
-          </NavItem>
-        ))}
-      </Nav>
+      <SettingsTabBar
+        tabs={TABS}
+        active={activeTab}
+        onChange={setActiveTab}
+        color={section?.color}
+      />
 
       <TabContent activeTab={activeTab}>
         {TABS.map(tab => {

@@ -2,10 +2,10 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { setCompanyProfileAction } from '../../../slices/companyProfile/reducer';
 import {
-  Nav, NavItem, NavLink, TabContent, TabPane,
+  TabContent, TabPane,
   Button, Col, Spinner, Alert,
 } from 'reactstrap';
-import classnames from 'classnames';
+import SettingsTabBar from '../Components/SettingsTabBar';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
@@ -323,7 +323,7 @@ const updateLocalStorageBranding = (freshProfile = {}) => {
 // ─────────────────────────────────────────────────────────────────────────────
 // Component
 // ─────────────────────────────────────────────────────────────────────────────
-const CompanyProfile = () => {
+const CompanyProfile = ({ section }) => {
   const dispatch = useDispatch();
 
   const [activeTab,       setActiveTab]       = useState('company-profile');
@@ -474,31 +474,16 @@ const CompanyProfile = () => {
         </Alert>
       )}
 
-      <Nav pills className="nav-customs nav-danger mb-3" style={{ flexWrap: 'wrap' }}>
-        {TABS.map((tab) => {
-          const hasDupIndicator =
-            (tab.id === 'contact-information' && contactHasDup) ||
-            (tab.id === 'email-configuration' && emailConfigHasDup);
-          return (
-            <NavItem key={tab.id}>
-              <NavLink
-                style={{ cursor: 'pointer', position: 'relative' }}
-                className={classnames({ active: activeTab === tab.id })}
-                onClick={() => setActiveTab(tab.id)}
-              >
-                {tab.label}
-                {hasDupIndicator && (
-                  <span title="Duplicate values detected" style={{
-                    position: 'absolute', top: 4, right: 4,
-                    width: 7, height: 7, borderRadius: '50%',
-                    background: '#f06548', display: 'inline-block',
-                  }} />
-                )}
-              </NavLink>
-            </NavItem>
-          );
-        })}
-      </Nav>
+      <SettingsTabBar
+        tabs={TABS.map(tab => ({
+          ...tab,
+          alert: (tab.id === 'contact-information' && contactHasDup) ||
+                 (tab.id === 'email-configuration' && emailConfigHasDup),
+        }))}
+        active={activeTab}
+        onChange={setActiveTab}
+        color={section?.color}
+      />
 
       <TabContent activeTab={activeTab}>
         {TABS.map((tab) => {
